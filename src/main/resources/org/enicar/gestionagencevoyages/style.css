@@ -1,0 +1,146 @@
+.root {
+    -fx-background-image: url("./beach-bg.jpg");
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+    -fx-background-repeat: no-repeat;
+    -fx-font-family: "Poppins", "Segoe UI", "Arial";
+}
+
+
+.label {
+    -fx-text-fill: #005466;
+    -fx-font-size: 14px;
+}
+
+.title {
+    -fx-font-size: 26px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1D3557;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 4, 0.3, 1, 1);
+}
+
+.button {
+    -fx-background-color: linear-gradient(to right, #A8DADC, #F1FAEE);
+    -fx-text-fill: #1D3557;
+    -fx-font-size: 12px;
+    -fx-font-family: "Poppins", Arial;
+    -fx-background-radius: 20;
+    -fx-cursor: hand;
+    -fx-padding: 8 16;
+}
+
+#parametresButton {
+    -fx-background-color: linear-gradient(to right, #A8DADC, #F1FAEE);
+    -fx-text-fill: #1D3557;
+    -fx-font-size: 15px;
+    -fx-background-radius: 25;
+    -fx-padding: 10 20;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 3);
+}
+
+.button:hover {
+    -fx-background-color: linear-gradient(to right, #89C2D9, #E8E8E4);
+}
+
+
+.button:hover {
+    -fx-background-color: #61A5C2;
+    -fx-scale-x: 1.03;
+    -fx-scale-y: 1.03;
+}
+
+.button-danger {
+    -fx-background-color: #E57373;
+}
+.button-danger:hover {
+    -fx-background-color: #EF5350;
+}
+
+.text-field, .combo-box {
+    -fx-background-color: white;
+    -fx-border-color: #A8DADC;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-padding: 6;
+    -fx-text-fill: #1D3557;
+}
+
+.text-field:focused, .combo-box:focused {
+    -fx-border-color: #61A5C2;
+    -fx-effect: dropshadow(gaussian, #89C2D9, 5, 0.2, 0, 0);
+}
+
+.table-view {
+    -fx-background-color: white;
+    -fx-border-color: #A8DADC;
+    -fx-border-radius: 8;
+}
+
+.table-view .column-header {
+    -fx-background-color: #89C2D9;
+    -fx-text-fill: white;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #61A5C2;
+    -fx-text-fill: white;
+}
+
+.tooltip {
+    -fx-background-color: rgba(255, 255, 255, 0.95);
+    -fx-text-fill: #1D3557;
+    -fx-font-size: 13px;
+    -fx-background-radius: 8;
+    -fx-padding: 6 10 6 10;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 4, 0.2, 0, 1);
+}
+
+.header-bar {
+    -fx-background-color: linear-gradient(to right, #A8DADC, #FFE8C2);
+    -fx-padding: 10;
+    -fx-alignment: center;
+    -fx-spacing: 15;
+}
+
+.footer {
+    -fx-background-color: #FFE8C2;
+    -fx-padding: 10;
+    -fx-alignment: center;
+    -fx-font-size: 12px;
+    -fx-text-fill: #6B705C;
+}
+
+.menu-btn {
+    -fx-background-color: #A8DADC;
+    -fx-text-fill: #1D3557;
+    -fx-font-size: 14px;
+    -fx-font-family: "Arial";
+    -fx-font-weight: bold;
+    -fx-background-radius: 20;
+    -fx-padding: 8 20 8 20;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 3, 0, 0, 2);
+}
+
+.menu-btn:hover {
+    -fx-background-color: #457B9D;
+    -fx-text-fill: #F1FAEE;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0, 0, 3);
+}
+
+.menu-btn:pressed {
+    -fx-background-color: #1D3557;
+    -fx-text-fill: #F1FAEE;
+    -fx-scale-x: 0.98;
+    -fx-scale-y: 0.98;
+}
+
+.sidebar {
+    -fx-background-color: #F1FAEE;
+    -fx-padding: 15;
+    -fx-spacing: 10;
+    -fx-border-width: 0 1 0 0;
+    -fx-border-color: #A8DADC;
+}
