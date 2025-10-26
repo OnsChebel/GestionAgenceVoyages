@@ -11,6 +11,13 @@ public class Gestionnaire extends Personne implements CalculSalaire {
     private HashSet<Client> clients;
     private double bonus;
     private double salairefixe;
+    public Gestionnaire() {
+        super();
+        this.poste = "";
+        this.reservations = new HashSet<>();
+        this.clients = new HashSet<>();
+        this.bonus = 0;
+    }
     public Gestionnaire(int id, String nom, String prenom, Coordonnes coord, Date priseFonct, String poste,double bonus, double salairefixe) {
         super(id, nom, prenom, coord);
         this.priseFonct = priseFonct;
@@ -92,7 +99,7 @@ public class Gestionnaire extends Personne implements CalculSalaire {
         System.out.println("Donner les reservations:");
         char choix;
         do{
-            Reservation res = null;
+            Reservation res = new Reservation();
             res.ecrire(sc);
             ajouterReservation(res);
             System.out.println("Y a-t-il d'autres reservations? :");
@@ -101,7 +108,7 @@ public class Gestionnaire extends Personne implements CalculSalaire {
         System.out.println("Donner les clients:");
         char choix2;
         do{
-            Client cli = null;
+            Client cli = new Client();
             cli.ecrire(sc);
             ajouterClient(cli);
             System.out.println("Y a-t-il d'autres clients? :");

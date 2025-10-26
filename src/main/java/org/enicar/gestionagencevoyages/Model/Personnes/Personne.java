@@ -12,6 +12,12 @@ public abstract class Personne {
     protected String prenom;
     protected Coordonnes coord;
 
+    public Personne(){
+        this.id = 0;
+        this.nom = "";
+        this.prenom = "";
+
+    }
     public Personne (int id, String nom, String prenom ,Coordonnes coord)
     {
         this.id = id;

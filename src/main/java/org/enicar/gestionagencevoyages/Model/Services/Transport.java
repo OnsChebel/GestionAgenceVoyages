@@ -8,6 +8,10 @@ import java.util.Scanner;
 public class Transport extends ServiceVoyage {
     String type;
 
+    public Transport() {
+        super();
+        this.type = "";
+    }
     public Transport(int id, double prixBase, boolean statut, String type) {
         super(id, prixBase, statut);
         this.type = type;

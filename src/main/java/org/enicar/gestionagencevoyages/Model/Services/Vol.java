@@ -9,6 +9,11 @@ public class Vol extends ServiceVoyage{
     private double taxAeroport;
     private ArrayList<Aeroport> escales;
 
+    public Vol(){
+        super();
+        this.taxAeroport = 0.0;
+        escales = new ArrayList<>();
+    }
     public Vol(int id, double prixBase, boolean statut, Aeroport aDepart, Aeroport aArrivee, double taxAeroport) {
         super(id, prixBase, statut);
         this.aDepart = aDepart;

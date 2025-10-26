@@ -7,6 +7,11 @@ public class Accomodation extends ServiceVoyage{
     double tarifsSupp;
     HashSet<String> servicesIncluts;
 
+    public Accomodation(){
+        super();
+        this.tarifsSupp = 0.0;
+        this.servicesIncluts = new HashSet<>();
+    }
     public Accomodation(int id, double prixBase, boolean statut) {
         super(id, prixBase, statut);
         tarifsSupp = 0.0;

@@ -5,11 +5,15 @@ import java.util.Scanner;
 import org.enicar.gestionagencevoyages.Model.Services.*;
 import org.enicar.gestionagencevoyages.Model.Personnes.Date;
 
-public class Reservation {
+public sealed class Reservation permits ReservationConfirmee, ReservationAnnulee {
     private int idReservation;
     private Date dateRes;
     private HashMap<Integer, ServiceVoyage> servInclus;
 
+    public Reservation(){
+        this.idReservation = 0;
+        this.servInclus = new HashMap<>();
+    }
     public Reservation(int idReservation, Date dateRes) {
         this.idReservation = idReservation;
         this.dateRes = dateRes;
@@ -57,25 +61,25 @@ public class Reservation {
             int option = sc.nextInt();
             switch(option){
                 case 1:{
-                    Vol v = null;
+                    Vol v = new Vol();
                     v.ecrire(sc);
                     ajouterServInclus(i,v);
                     break;
                 }
                 case 2:{
-                    Accomodation acc = null;
+                    Accomodation acc = new Accomodation();
                     acc.ecrire(sc);
                     ajouterServInclus(i,acc);
                     break;
                 }
                 case 3:{
-                    Activite ac = null;
+                    Activite ac = new Activite();
                     ac.ecrire(sc);
                     ajouterServInclus(i,ac);
                     break;
                 }
                 case 4:{
-                    Transport t = null;
+                    Transport t = new Transport();
                     t.ecrire(sc);
                     ajouterServInclus(i,t);
                     break;

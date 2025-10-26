@@ -4,9 +4,14 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import org.enicar.gestionagencevoyages.Model.Reservations.*;
 
-public class Client extends Personne {
+public sealed class Client extends Personne permits ClientPremium {
     private Adresse adresse;
     private ArrayList<Reservation> hisResv;
+
+    public Client(){
+        super();
+        this.hisResv = new ArrayList<>();
+    }
     public Client(int id, String nom, String prenom, Adresse adresse) {
         super(id, nom, prenom, null);
         this.adresse = adresse;

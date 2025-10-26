@@ -12,6 +12,12 @@ public class Activite extends ServiceVoyage {
     int horaire;
     int duree;
 
+    public Activite() {
+        super();
+        this.intitule = "";
+        this.horaire = 0;
+        this.duree = 0;
+    }
     public Activite (int id, double prixBase, boolean statut, String intitule, Date date, int horaire, int duree)
     {
         super(id, prixBase, statut);
