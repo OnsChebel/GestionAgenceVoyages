@@ -6,6 +6,12 @@ public abstract class ServiceVoyage implements Reservable {
     protected double prixBase;
     protected boolean statut;
 
+    public ServiceVoyage(){
+        super();
+        this.id = 0;
+        this.prixBase = 0;
+        this.statut = false;
+    }
     public ServiceVoyage(int id, double prixBase, boolean statut)
     {
         this.id = id;
