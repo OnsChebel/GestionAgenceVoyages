@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.enicar.gestionagencevoyages.HelloController">
+<AnchorPane xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.enicar.gestionagencevoyages.MainController">
    <children>
       <Label alignment="CENTER" layoutX="182.0" layoutY="53.0" text="Ajouter un client">
          <font>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.enicar.gestionagencevoyages.VolController">
+   <children>
+      <Text layoutX="204.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ajouter un vol">
+         <font>
+            <Font name="Broadway" size="25.0" />
+         </font>
+      </Text>
+      <Text layoutX="35.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Id service:" />
+      <TextField layoutX="104.0" layoutY="112.0" />
+      <Text layoutX="35.0" layoutY="168.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prix base:" />
+      <TextField layoutX="105.0" layoutY="151.0" />
+      <Text layoutX="35.0" layoutY="213.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Aeroport depart:" />
+      <TextField layoutX="130.0" layoutY="196.0" />
+      <Text layoutX="35.0" layoutY="249.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Aeroport arrivee:" />
+      <TextField layoutX="130.0" layoutY="232.0" />
+      <Text layoutX="35.0" layoutY="281.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Escales:" />
+      <TextField layoutX="130.0" layoutY="264.0" />
+      <Text layoutX="35.0" layoutY="316.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Taxes aeroport:" />
+      <TextField layoutX="129.0" layoutY="299.0" />
+      <Text layoutX="35.0" layoutY="348.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total:" />
+      <TextField layoutX="105.0" layoutY="331.0" />
+      <Button layoutX="274.0" layoutY="361.0" mnemonicParsing="false" text="Enregistrer" />
+   </children>
+</AnchorPane>
