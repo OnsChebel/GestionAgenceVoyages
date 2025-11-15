@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.enicar.gestionagencevoyages.ReservationController">
+   <children>
+      <Text layoutX="144.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ajouter une réservation">
+         <font>
+            <Font name="Broadway" size="25.0" />
+         </font>
+      </Text>
+      <Text layoutX="28.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID Reservation:" />
+      <TextField layoutX="116.0" layoutY="101.0" />
+      <Text layoutX="28.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date de réservation:" />
+      <TextField layoutX="141.0" layoutY="146.0" />
+      <Text layoutX="28.0" layoutY="213.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Statut:" />
+      <Button layoutX="144.0" layoutY="253.0" mnemonicParsing="false" text="Ajouter des services" />
+      <Button layoutX="240.0" layoutY="315.0" mnemonicParsing="false" text="Enregistrer" />
+      <Text layoutX="28.0" layoutY="270.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Services inclus:" />
+      <ChoiceBox fx:id="ResStatut" layoutX="84.0" layoutY="196.0" prefWidth="150.0" />
+   </children>
+</AnchorPane>
