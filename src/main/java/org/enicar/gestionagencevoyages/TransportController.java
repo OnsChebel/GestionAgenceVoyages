@@ -1,24 +1,60 @@
 package org.enicar.gestionagencevoyages;
+
 import javafx.fxml.FXML;
-import javafx.scene.control.ChoiceBox;
-import javafx.collections.FXCollections;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+import org.enicar.gestionagencevoyages.Model.Services.Transport;
+import org.enicar.gestionagencevoyages.Service.TransportService;
+import org.enicar.gestionagencevoyages.TransportListController;
+
+import java.io.IOException;
 
 public class TransportController {
 
+    @FXML private TextField idField;
+    @FXML private TextField prixField;
+    @FXML private TextField typeField;
+
+    private final TransportService service = new TransportService();
+    private int reservationId;
+
+    public void setReservationId(int id) {
+        this.reservationId = id;
+    }
+
     @FXML
-    private ChoiceBox<String> transportType;
+    private void handleEnregistrer() {
+        try {
+            double prix = Double.parseDouble(prixField.getText().replace(",", "."));
+            String type = typeField.getText();
 
-    // Liste des statuts possibles (selon la classe scellée StatutReservation)
-    private final String[] types = {"Aucun","Voiture","Bus"};
+            Transport t = new Transport(0, prix, type);
+            service.addTransport(t, reservationId);
+            System.out.println("Transport ajouté !");
+            handleRetour();
 
-    // Méthode appelée après le chargement du FXML (étape d'initialisation)
-    public void initialize() {
-        // 2. Initialiser la ChoiceBox avec les options
-        transportType.setItems(FXCollections.observableArrayList(types));
+        } catch (NumberFormatException e) {
+            System.err.println("Erreur : Le prix doit être un nombre valide.");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
-        // Sélectionner un statut par défaut
-        transportType.setValue("Aucun");
-        // OU
-        // ResStatut.getSelectionModel().selectFirst();
+    @FXML
+    private void handleRetour() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("transport-list.fxml"));
+            Parent root = loader.load();
+
+            TransportListController controller = loader.getController();
+            controller.initData(this.reservationId);
+
+            Stage stage = (Stage) idField.getScene().getWindow();
+            stage.getScene().setRoot(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

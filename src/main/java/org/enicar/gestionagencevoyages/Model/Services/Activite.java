@@ -1,70 +1,44 @@
 package org.enicar.gestionagencevoyages.Model.Services;
 
+import javafx.beans.property.*;
 import org.enicar.gestionagencevoyages.Model.Personnes.Date;
-import java.util.Scanner;
-/**
- *
- * @author Ons
- */
+
 public class Activite extends ServiceVoyage {
-    String intitule;
-    Date date;
-    int horaire;
-    int duree;
+    private final StringProperty intitule;
+    private final ObjectProperty<Date> date;
+    private final IntegerProperty horaire;
+    private final IntegerProperty duree;
 
     public Activite() {
         super();
-        this.intitule = "";
-        this.horaire = 0;
-        this.duree = 0;
-    }
-    public Activite (int id, double prixBase, boolean statut, String intitule, Date date, int horaire, int duree)
-    {
-        super(id, prixBase, statut);
-        this.intitule = intitule;
-        this.date = date;
-        this.horaire = horaire;
-        this.duree = duree;
+        this.intitule = new SimpleStringProperty("");
+        this.date = new SimpleObjectProperty<>();
+        this.horaire = new SimpleIntegerProperty(0);
+        this.duree = new SimpleIntegerProperty(0);
     }
 
-    public void setIntitule( String intitule) {this.intitule = intitule;}
-    public void setDate( Date date) {this.date = date;}
-    public void setHoraire( int horaire) {this.horaire = horaire;}
-    public void setDuree( int duree) {this.duree = duree;}
-
-    public String getIntitule(){return this.intitule;}
-    public Date getDate(){return this.date;}
-    public int getHoraire() {return this.horaire;}
-    public int getDuree() {return this.duree;}
-
-    @Override
-    public void ecrire(Scanner sc)
-    {
-        super.ecrire(sc);
-        System.out.println("Donner l'intitule: ");
-        intitule = sc.nextLine();
-        System.out.println("Donner le jour: ");
-        int j = sc.nextInt();
-        System.out.println("Donner le mois: ");
-        int m = sc.nextInt();
-        System.out.println("Donner l'annee: ");
-        int a = sc.nextInt();
-        date = new Date(j, m, a);
-        System.out.println("Donner l'horaire: ");
-        horaire = sc.nextInt();
-        System.out.println("Donner la duree: ");
-        duree = sc.nextInt();
+    public Activite(int id, double prixBase, String intitule, Date date, int horaire, int duree) {
+        super(id, prixBase);
+        this.intitule = new SimpleStringProperty(intitule);
+        this.date = new SimpleObjectProperty<>(date);
+        this.horaire = new SimpleIntegerProperty(horaire);
+        this.duree = new SimpleIntegerProperty(duree);
     }
 
-    @Override
-    public void afficher()
-    {
-        super.afficher();
-        System.out.println("Intitule: " + intitule);
-        System.out.println("Date: " + date.toString());
-        System.out.println("Horaire: " + horaire + " h");
-        System.out.println("Duree: " + duree);
-    }
 
+    public String getIntitule() { return intitule.get(); }
+    public void setIntitule(String val) { this.intitule.set(val); }
+    public StringProperty intituleProperty() { return intitule; }
+
+    public Date getDate() { return date.get(); }
+    public void setDate(Date val) { this.date.set(val); }
+    public ObjectProperty<Date> dateProperty() { return date; }
+
+    public int getHoraire() { return horaire.get(); }
+    public void setHoraire(int val) { this.horaire.set(val); }
+    public IntegerProperty horaireProperty() { return horaire; }
+
+    public int getDuree() { return duree.get(); }
+    public void setDuree(int val) { this.duree.set(val); }
+    public IntegerProperty dureeProperty() { return duree; }
 }
-

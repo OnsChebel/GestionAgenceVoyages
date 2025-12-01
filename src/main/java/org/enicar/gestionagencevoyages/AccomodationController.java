@@ -1,27 +1,89 @@
 package org.enicar.gestionagencevoyages;
+
 import javafx.fxml.FXML;
-import javafx.scene.control.ListView;
-import javafx.scene.control.SelectionMode;
-import javafx.collections.FXCollections;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.control.*;
+import javafx.stage.Stage;
+import org.enicar.gestionagencevoyages.Model.Services.Accomodation;
+import org.enicar.gestionagencevoyages.Service.AccomodationService;
+
+import java.io.IOException;
 
 public class AccomodationController {
-    public AccomodationController() {
 
-    }
+    @FXML private TextField idField;
+    @FXML private TextField nomField;
+    @FXML private TextField adresseField;
+    @FXML private ChoiceBox<String> typeChoiceBox;
+    @FXML private TextField prixField;
+    @FXML private ListView<String> listSuppAcc;
+    @FXML private TextField tarifsSuppField;
+    @FXML private TextField totalField;
+
+    private final AccomodationService service = new AccomodationService();
+    private int reservationId;
+
+    public void setReservationId(int id) { this.reservationId = id; }
+
     @FXML
-    private ListView<String> listSuppAcc; // Le type doit correspondre aux données
-
     public void initialize() {
-        // 1. Remplir la liste (ici avec des données statiques pour l'exemple)
-        listSuppAcc.setItems(FXCollections.observableArrayList(
-                "Chambre individuelle",
-                "Pension complete",
-                "Spa",
-                "Baby sitter"
-        ));
+        typeChoiceBox.getItems().addAll("Hôtel", "Auberge", "Maison d'hôte", "Appartement");
+        typeChoiceBox.setValue("Hôtel");
 
-        // 2. ÉTAPE CLÉ : Activer le mode de sélection multiple
+        listSuppAcc.getItems().addAll("Chambre individuelle", "Pension complete", "Spa", "Baby sitter");
+
         listSuppAcc.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
+        prixField.textProperty().addListener(o -> calculerTotal());
+        listSuppAcc.getSelectionModel().selectedItemProperty().addListener(o -> calculerTotal());
     }
 
+    private void calculerTotal() {
+        try {
+            double prixBase = prixField.getText().isEmpty() ? 0 : Double.parseDouble(prixField.getText());
+            double supp = 0;
+            for (String item : listSuppAcc.getSelectionModel().getSelectedItems()) {
+                if (item.equals("Chambre individuelle")) supp += 100;
+                if (item.equals("Pension complete")) supp += 190;
+                if (item.equals("Spa")) supp += 225;
+                if (item.equals("Baby sitter")) supp += 300;
+            }
+            tarifsSuppField.setText(String.valueOf(supp));
+            totalField.setText(String.format("%.2f", prixBase + supp));
+        } catch (NumberFormatException e) {
+            totalField.setText("...");
+        }
+    }
+
+    @FXML
+    private void handleEnregistrer() {
+        try {
+            double prix = Double.parseDouble(prixField.getText());
+            String nom = nomField.getText();
+            String type = typeChoiceBox.getValue();
+            String adresse = adresseField.getText();
+            Accomodation acc = new Accomodation(0, prix, nom, type, adresse);
+
+            acc.getServicesIncluts().addAll(listSuppAcc.getSelectionModel().getSelectedItems());
+            acc.recalculerTarifsSupp();
+
+            service.addAccomodation(acc, reservationId);
+
+            retourALaListe();
+        } catch (Exception e) { e.printStackTrace(); }
+    }
+
+    public void retourALaListe() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("accomodation-list.fxml"));
+            Parent root = loader.load();
+            AccomodationListController controller = loader.getController();
+            controller.initData(this.reservationId);
+            Stage stage = (Stage) idField.getScene().getWindow();
+            stage.getScene().setRoot(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

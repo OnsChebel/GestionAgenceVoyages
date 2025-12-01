@@ -4,6 +4,7 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -14,14 +15,28 @@
             <Font name="Broadway" size="25.0" />
          </font>
       </Text>
-      <Text layoutX="28.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID Reservation:" />
-      <TextField layoutX="116.0" layoutY="101.0" />
-      <Text layoutX="28.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date de réservation:" />
-      <TextField layoutX="141.0" layoutY="146.0" />
-      <Text layoutX="28.0" layoutY="213.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Statut:" />
-      <Button layoutX="144.0" layoutY="253.0" mnemonicParsing="false" text="Ajouter des services" />
-      <Button layoutX="240.0" layoutY="315.0" mnemonicParsing="false" text="Enregistrer" />
-      <Text layoutX="28.0" layoutY="270.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Services inclus:" />
-      <ChoiceBox fx:id="ResStatut" layoutX="84.0" layoutY="196.0" prefWidth="150.0" />
+      <Button fx:id="enregistrerButton" layoutX="240.0" layoutY="345.0" mnemonicParsing="false" onAction="#handleEnregistrerAction" text="Enregistrer" />
+      <Text layoutX="28.0" layoutY="300.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Services inclus:" />
+      <Button fx:id="retourButton" layoutX="357.0" layoutY="345.0" mnemonicParsing="false" onAction="#handleRetourAction" text="Retour" />
+      <Button fx:id="btnAjoutVol" disable="true" layoutX="144.0" layoutY="283.0" mnemonicParsing="false" onAction="#handleAjouterVolAction" text="Ajouter vol" />
+      <Button fx:id="btnAjoutHotel" disable="true" layoutX="241.0" layoutY="283.0" mnemonicParsing="false" onAction="#handleAjouterHotelAction" text="Ajouter hôtel" />
+      <Button fx:id="btnAjoutTransport" disable="true" layoutX="345.0" layoutY="283.0" mnemonicParsing="false" onAction="#handleAjouterTransportAction" text="Ajouter transport" />
+      <Button fx:id="btnAjoutActivite" disable="true" layoutX="478.0" layoutY="283.0" mnemonicParsing="false" onAction="#handleAjouterActiviteAction" text="Ajouter activité" />
+      <VBox layoutX="277.0" layoutY="74.0" prefHeight="200.0" prefWidth="193.0" spacing="20.0">
+         <children>
+            <TextField fx:id="idReservationField" />
+            <TextField fx:id="clientIdField" />
+            <TextField fx:id="dateReservationField" />
+            <ChoiceBox fx:id="ResStatut" prefWidth="150.0" />
+         </children>
+      </VBox>
+      <VBox alignment="TOP_RIGHT" layoutX="133.0" layoutY="74.0" prefHeight="200.0" prefWidth="107.0" spacing="32.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ID Reservation:" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ID client:" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Date de réservation:" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Statut:" />
+         </children>
+      </VBox>
    </children>
 </AnchorPane>

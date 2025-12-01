@@ -6,7 +6,6 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.enicar.gestionagencevoyages.ActiviteController">
    <children>
       <Text layoutX="165.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ajouter une activité">
@@ -14,18 +13,24 @@
             <Font name="Broadway" size="25.0" />
          </font>
       </Text>
-      <Text layoutX="45.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Id service:" />
-      <TextField layoutX="114.0" layoutY="122.0" />
-      <Text layoutX="45.0" layoutY="178.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prix base:" />
-      <TextField layoutX="115.0" layoutY="161.0" />
-      <Text layoutX="45.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Intitulé:" />
-      <TextField layoutX="115.0" layoutY="200.0" />
-      <Text layoutX="45.0" layoutY="253.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date:" />
-      <TextField layoutX="115.0" layoutY="236.0" />
-      <Text layoutX="45.0" layoutY="293.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Horaire:" />
-      <TextField layoutX="115.0" layoutY="276.0" />
-      <Text layoutX="45.0" layoutY="329.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Durée:" />
-      <TextField layoutX="115.0" layoutY="312.0" />
-      <Button layoutX="248.0" layoutY="349.0" mnemonicParsing="false" text="Enregistrer" />
+      <Text layoutX="190.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Id service:" />
+      <TextField fx:id="idField" disable="true" layoutX="259.0" layoutY="101.0" promptText="Auto" />
+
+      <Text layoutX="190.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prix base:" />
+      <TextField fx:id="prixField" layoutX="260.0" layoutY="140.0" promptText="0.0" />
+
+      <Text layoutX="190.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Intitulé:" />
+      <TextField fx:id="intituleField" layoutX="260.0" layoutY="179.0" />
+
+      <Text layoutX="190.0" layoutY="232.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date:" />
+      <TextField fx:id="dateField" layoutX="260.0" layoutY="215.0" promptText="Ex: 25/12/2025" />
+
+      <Text layoutX="190.0" layoutY="272.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Horaire:" />
+      <TextField fx:id="horaireField" layoutX="260.0" layoutY="255.0" promptText="Ex: 14" />
+
+      <Text layoutX="190.0" layoutY="308.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Durée" />
+      <TextField fx:id="dureeField" layoutX="260.0" layoutY="291.0" promptText="Ex: 2" />
+      <Button layoutX="200.0" layoutY="347.0" mnemonicParsing="false" onAction="#handleEnregistrer" text="Enregistrer" />
+      <Button layoutX="320.0" layoutY="347.0" mnemonicParsing="false" onAction="#handleRetour" text="Retour" />
    </children>
 </AnchorPane>

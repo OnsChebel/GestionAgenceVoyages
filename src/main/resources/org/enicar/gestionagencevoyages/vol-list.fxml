@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.enicar.gestionagencevoyages.VolListController">
+   <children>
+      <Text layoutX="213.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste des vols">
+         <font>
+            <Font name="Broadway" size="25.0" />
+         </font>
+      </Text>
+      <TableView fx:id="volTable" layoutX="28.0" layoutY="114.0" prefHeight="200.0" prefWidth="544.0">
+        <columns>
+            <TableColumn fx:id="idColumn" prefWidth="61.5999755859375" text="Id" />
+            <TableColumn fx:id="prixColumn" prefWidth="78.39990234375" text="Prix Base" />
+            <TableColumn fx:id="taxeColumn" prefWidth="74.4000244140625" text="Taxes" />
+
+            <TableColumn fx:id="totalColumn" prefWidth="83.99993896484375" text="Total" />
+
+            <TableColumn fx:id="departColumn" prefWidth="73.60003662109375" text="Départ" />
+            <TableColumn fx:id="arriveeColumn" text="Arrivée" />
+            <TableColumn fx:id="escalesColumn" prefWidth="89.5999755859375" text="Escales" />
+        </columns>
+      </TableView>
+      <HBox alignment="CENTER" layoutX="222.0" layoutY="330.0" prefHeight="39.0" prefWidth="156.0" spacing="30.0">
+         <children>
+            <Button fx:id="ajouterButton" mnemonicParsing="false" onAction="#handleAjouterVol" text="Enregistrer" />
+            <Button fx:id="retourButton" mnemonicParsing="false" onAction="#handleRetour" text="Retour" />
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

@@ -1,40 +1,22 @@
 package org.enicar.gestionagencevoyages.Model.Services;
 
-import java.util.Scanner;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
-/**
- * @author Ons
- */
 public class Transport extends ServiceVoyage {
-    String type;
+    private final StringProperty type;
 
     public Transport() {
         super();
-        this.type = "";
-    }
-    public Transport(int id, double prixBase, boolean statut, String type) {
-        super(id, prixBase, statut);
-        this.type = type;
+        this.type = new SimpleStringProperty("");
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public Transport(int id, double prixBase, String type) {
+        super(id, prixBase);
+        this.type = new SimpleStringProperty(type);
     }
 
-    public String getType() {
-        return type;
-    }
-
-    @Override
-    public void ecrire(Scanner sc) {
-        super.ecrire(sc);
-        System.out.println("Donner le type: ");
-        type = sc.nextLine();
-    }
-
-    @Override
-    public void afficher() {
-        super.afficher();
-        System.out.println("Type : " + type);
-    }
+    public String getType() { return type.get(); }
+    public void setType(String type) { this.type.set(type); }
+    public StringProperty typeProperty() { return type; }
 }
