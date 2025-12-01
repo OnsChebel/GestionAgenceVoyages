@@ -1,70 +1,68 @@
 package org.enicar.gestionagencevoyages.Model.Services;
 
-import java.util.HashSet;
-import java.util.Scanner;
+import javafx.beans.property.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
-public class Accomodation extends ServiceVoyage{
-    double tarifsSupp;
-    HashSet<String> servicesIncluts;
+import java.util.List;
 
-    public Accomodation(){
+public class Accomodation extends ServiceVoyage {
+
+    private final StringProperty nom;
+    private final StringProperty type;
+    private final StringProperty adresse;
+    private final DoubleProperty tarifsSupp;
+
+    private final ObservableList<String> servicesIncluts;
+
+    public Accomodation() {
         super();
-        this.tarifsSupp = 0.0;
-        this.servicesIncluts = new HashSet<>();
-    }
-    public Accomodation(int id, double prixBase, boolean statut) {
-        super(id, prixBase, statut);
-        tarifsSupp = 0.0;
-        servicesIncluts = new HashSet<>();
+        this.nom = new SimpleStringProperty("");
+        this.type = new SimpleStringProperty("");
+        this.adresse = new SimpleStringProperty("");
+        this.tarifsSupp = new SimpleDoubleProperty(0.0);
+        this.servicesIncluts = FXCollections.observableArrayList();
     }
 
-    public void setTarifsSupp(){
-        if (servicesIncluts.contains("Chambre individuelle") ) tarifsSupp =+ 100.0;
-        if (servicesIncluts.contains("Pension complete")) tarifsSupp =+ 190.0;
-        if (servicesIncluts.contains("Spa")) tarifsSupp =+ 225.0;
-        if (servicesIncluts.contains("Baby sitter")) tarifsSupp =+ 300.0;
+    public Accomodation(int id, double prixBase, String nom, String type, String adresse) {
+        super(id, prixBase);
+        this.nom = new SimpleStringProperty(nom);
+        this.type = new SimpleStringProperty(type);
+        this.adresse = new SimpleStringProperty(adresse);
+        this.tarifsSupp = new SimpleDoubleProperty(0.0);
+        this.servicesIncluts = FXCollections.observableArrayList();
     }
 
-    public double getTarifsSupp(){return tarifsSupp;}
-    public HashSet<String> getServicesIncluts(){return servicesIncluts;}
-
-    public void ajouterServicesInclut(String service){
-        servicesIncluts.add(service);
-    }
-    public void supprimerServicesInclut(String service){
-        servicesIncluts.remove(service);
-    }
-    public boolean chercherServicesInclut(String service){
-        return servicesIncluts.contains(service);
-    }
-
-    @Override
-    public void ecrire(Scanner sc) {
-        super.ecrire(sc);
-        System.out.println("Y-a-t-il des services supp? ");
-        String rep = sc.nextLine();
-        if (rep.equals("oui")) {
-            char choix;
-            do {
-                System.out.println("Donner le service:");
-                String service = sc.nextLine();
-                ajouterServicesInclut(service);
-                System.out.println("Y-a-t-il un autre service?");
-                choix = sc.next().charAt(0);
-            } while (choix == 'o' || choix == 'O');
+    public void recalculerTarifsSupp() {
+        double totalSupp = 0.0;
+        for (String service : servicesIncluts) {
+            switch (service) {
+                case "Chambre individuelle" -> totalSupp += 100.0;
+                case "Pension complete" -> totalSupp += 190.0;
+                case "Spa" -> totalSupp += 225.0;
+                case "Baby sitter" -> totalSupp += 300.0;
+            }
         }
+        this.tarifsSupp.set(totalSupp);
     }
 
-    @Override
-    public void afficher() {
-        super.afficher();
-        System.out.println("Tarifs Supp: " + tarifsSupp);
-        System.out.println("ServicesIncluts: ");
-        for (String service : servicesIncluts) {System.out.println(service);}
-    }
 
-    @Override
-    public void calculerCoutTotal(double prix) {
-        prix = super.getPrixBase() + tarifsSupp;
-    }
+    public String getNom() { return nom.get(); }
+    public void setNom(String val) { this.nom.set(val); }
+    public StringProperty nomProperty() { return nom; }
+
+    public String getType() { return type.get(); }
+    public void setType(String val) { this.type.set(val); }
+    public StringProperty typeProperty() { return type; }
+
+    public String getAdresse() { return adresse.get(); }
+    public void setAdresse(String val) { this.adresse.set(val); }
+    public StringProperty adresseProperty() { return adresse; }
+
+    public double getTarifsSupp() { return tarifsSupp.get(); }
+    public void setTarifsSupp(double val) { this.tarifsSupp.set(val); }
+    public DoubleProperty tarifsSuppProperty() { return tarifsSupp; }
+
+    public ObservableList<String> getServicesIncluts() { return servicesIncluts; }
+    public void setServicesIncluts(List<String> list) { this.servicesIncluts.setAll(list); }
 }

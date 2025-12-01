@@ -22,7 +22,6 @@ public class ServiceListController {
             Stage stage = (Stage) ajouterServiceButton.getScene().getWindow();
             stage.setTitle("Ajout de service");
             stage.getScene().setRoot(root);
-            // stage.sizeToScene(); // Optionnel : ajuster la taille à la nouvelle scène
         } catch (IOException e) {
             System.err.println("Erreur lors du chargement de l'interface de l'ajout d'un service.");
             e.printStackTrace();

@@ -5,28 +5,45 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.enicar.gestionagencevoyages.AccomodationController">
    <children>
-      <Text layoutX="113.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ajouter une accomadation ">
-         <font>
-            <Font name="Broadway" size="25.0" />
-         </font>
+      <Text layoutX="132.0" layoutY="49.0" text="Ajouter un Hébergement">
+         <font><Font name="Broadway" size="25.0" /></font>
       </Text>
-      <Text layoutX="33.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Id service: " />
-      <TextField layoutX="99.0" layoutY="92.0" />
-      <Text layoutX="36.0" layoutY="173.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prix base:" />
-      <TextField layoutX="99.0" layoutY="156.0" />
-      <Text layoutX="36.0" layoutY="204.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Suppléments: " />
-      <ListView fx:id="listSuppAcc" layoutX="124.0" layoutY="191.0" prefHeight="43.0" prefWidth="200.0" />
-      <Text layoutX="33.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type: " />
-      <ChoiceBox layoutX="99.0" layoutY="122.0" prefWidth="150.0" />
-      <Text layoutX="33.0" layoutY="264.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tarifs supp:" />
-      <TextField layoutX="96.0" layoutY="247.0" />
-      <Text layoutX="33.0" layoutY="302.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total:" />
-      <TextField layoutX="96.0" layoutY="285.0" />
-      <Button layoutX="273.0" layoutY="345.0" mnemonicParsing="false" text="Enregistrer" />
+
+      <Text layoutX="33.0" layoutY="90.0" text="Id service: " />
+      <TextField fx:id="idField" disable="true" layoutX="99.0" layoutY="73.0" promptText="Auto" />
+
+      <Text layoutX="300.0" layoutY="89.0" text="Nom:" />
+      <TextField fx:id="nomField" layoutX="366.0" layoutY="72.0" promptText="Ex: Hôtel Royal" />
+
+      <Text layoutX="33.0" layoutY="128.0" text="Type: " />
+      <ChoiceBox fx:id="typeChoiceBox" layoutX="99.0" layoutY="111.0" prefWidth="150.0" />
+
+      <Text layoutX="300.0" layoutY="135.0" text="Adresse:" />
+      <TextField fx:id="adresseField" layoutX="366.0" layoutY="118.0" />
+
+      <Text layoutX="33.0" layoutY="173.0" text="Prix base:" />
+      <TextField fx:id="prixField" layoutX="96.0" layoutY="156.0" />
+
+      <Text layoutX="300.0" layoutY="175.0" text="Suppléments:" />
+      <ListView fx:id="listSuppAcc" layoutX="377.0" layoutY="156.0" prefHeight="80.0" prefWidth="150.0" />
+
+      <Text layoutX="33.0" layoutY="220.0" text="Tarifs supp:" />
+      <TextField fx:id="tarifsSuppField" disable="true" layoutX="96.0" layoutY="203.0" />
+
+      <Text layoutX="174.0" layoutY="278.0" text="Total:" />
+      <TextField fx:id="totalField" disable="true" layoutX="237.0" layoutY="261.0" />
+      <HBox alignment="CENTER" layoutX="203.0" layoutY="325.0" prefHeight="38.0" prefWidth="194.0" spacing="30.0">
+         <children>
+      
+            <Button onAction="#handleEnregistrer" text="Enregistrer" />
+            <Button mnemonicParsing="false" onAction="#retourALaListe" text="Retour" />
+         </children>
+      </HBox>
    </children>
 </AnchorPane>

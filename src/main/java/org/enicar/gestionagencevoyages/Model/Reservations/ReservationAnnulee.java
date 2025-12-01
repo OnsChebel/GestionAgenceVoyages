@@ -10,8 +10,8 @@ public final class ReservationAnnulee extends Reservation{
         super();
         this.raison = "";
     }
-    public ReservationAnnulee(int idReservation, Date dateRes, String raison) {
-        super(idReservation, dateRes);
+    public ReservationAnnulee(int idReservation,int clientId, Date dateRes,String statut, String raison) {
+        super(idReservation,clientId, dateRes, statut);
         this.raison = raison;
     }
 
@@ -19,16 +19,16 @@ public final class ReservationAnnulee extends Reservation{
         return raison;
     }
 
-    @Override
+    /*@Override
     public void ecrire(Scanner sc){
         super.ecrire(sc);
         System.out.println("Donner la raison de l'annulation");
         raison = sc.nextLine();
-    }
+    }*/
 
-    @Override
+    /*@Override
     public void afficher() {
         super.afficher();
         System.out.println("Raison de l'annulation" + raison);
-    }
+    }*/
 }

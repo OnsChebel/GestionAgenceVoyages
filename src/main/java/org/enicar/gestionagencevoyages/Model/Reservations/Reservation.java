@@ -1,49 +1,101 @@
 package org.enicar.gestionagencevoyages.Model.Reservations;
 
 import java.util.HashMap;
-import java.util.Scanner;
+//import java.util.Scanner;
 import org.enicar.gestionagencevoyages.Model.Services.*;
 import org.enicar.gestionagencevoyages.Model.Personnes.Date;
+import javafx.beans.property.*;
+
 
 public sealed class Reservation permits ReservationConfirmee, ReservationAnnulee {
-    private int idReservation;
-    private Date dateRes;
-    private HashMap<Integer, ServiceVoyage> servInclus;
+    private final IntegerProperty idReservation;
+    private final IntegerProperty clientId;
+    private final ObjectProperty<Date> dateRes;
+    private final ObjectProperty<HashMap<Integer, ServiceVoyage>> servInclus;
+    private final StringProperty statut;
 
     public Reservation(){
-        this.idReservation = 0;
-        this.servInclus = new HashMap<>();
+        this.idReservation = new SimpleIntegerProperty(0);
+        this.clientId = new SimpleIntegerProperty(0);
+        this.dateRes = new SimpleObjectProperty<>();
+        this.servInclus = new SimpleObjectProperty<>(new HashMap<>());
+        this.statut = new SimpleStringProperty("En Cours");
     }
-    public Reservation(int idReservation, Date dateRes) {
-        this.idReservation = idReservation;
-        this.dateRes = dateRes;
-        this.servInclus = new HashMap<>();
+    public Reservation(int idReservation,int clientId, Date dateRes, String statut) {
+        this.idReservation = new SimpleIntegerProperty(idReservation);
+        this.clientId = new SimpleIntegerProperty(clientId);
+        this.dateRes = new SimpleObjectProperty<>(dateRes);
+        this.servInclus = new SimpleObjectProperty<>(new HashMap<>());
+        this.statut = new SimpleStringProperty(statut);
     }
 
-    public void setIdReservation(int idReservation) {
-        this.idReservation = idReservation;
-    }
-    public int getIdReservation() {
+    public IntegerProperty idReservationProperty() {
         return idReservation;
     }
-    public Date getDateRes() {
+
+    public IntegerProperty clientIdProperty() {
+        return clientId;
+    }
+
+
+    public ObjectProperty<Date> dateResProperty() {
         return dateRes;
     }
-    public HashMap<Integer, ServiceVoyage> getServInclus() {
+
+    public ObjectProperty<HashMap<Integer, ServiceVoyage>> servInclusProperty() {
         return servInclus;
     }
+    public StringProperty statutProperty() {
+        return statut;
+    }
+    public void setIdReservation(Integer idReservation) {
+        this.idReservation.set(idReservation);
+    }
+
+    public void setClientId(int clientId) {
+        this.clientId.set(clientId);}
+
+    public void setStatut(String statut) { this.statut.set(statut); }
+
+    public StringProperty dateAfficheeProperty() {
+        return new SimpleStringProperty(dateRes.get() != null ? dateRes.get().toString() : "");
+    }
+
+    public String getStatut() {
+        return statut.get();
+    }
+    public int getIdReservation() {
+        return idReservation.get();
+    }
+    public Date getDateRes() {
+        return dateRes.get();
+    }
+
+    public int getClientId() {
+        return clientId.get();
+    }
+
+    /*public int getIdReservation() {
+        return idReservation;
+    }*/
+    /*public Date getDateRes() {
+        return dateRes;
+    }*/
+    /*public HashMap<Integer, ServiceVoyage> getServInclus() {
+        return servInclus;
+    }*/
 
     public void ajouterServInclus(Integer i, ServiceVoyage serviceVoyage) {
-        servInclus.put(i, serviceVoyage);
+        servInclus.get().put(i, serviceVoyage);
     }
     public void supprimerServInclus(Integer i) {
-        servInclus.remove(i);
+        servInclus.get().remove(i);
     }
     public void chercherServInclus(Integer i) {
-        servInclus.get(i);
+        servInclus.get().get(i);
     }
 
-    public void ecrire(Scanner sc){
+    /*public void ecrire(Scanner sc){
         System.out.println("Donner l'identifiant de la reservation: ");
         idReservation = sc.nextInt();
         System.out.println("Donner le jour: ");
@@ -100,6 +152,6 @@ public sealed class Reservation permits ReservationConfirmee, ReservationAnnulee
         for(ServiceVoyage serviceVoyage : servInclus.values()) {
             serviceVoyage.afficher();
         }
-    }
+    }*/
 }
 

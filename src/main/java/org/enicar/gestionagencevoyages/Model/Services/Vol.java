@@ -1,47 +1,67 @@
 package org.enicar.gestionagencevoyages.Model.Services;
 
+import javafx.beans.property.*;
 import java.util.ArrayList;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Vol extends ServiceVoyage{
-    private Aeroport aDepart;
-    private Aeroport aArrivee;
-    private double taxAeroport;
-    private ArrayList<Aeroport> escales;
+    private final ObjectProperty<Aeroport> aDepart;
+    private final ObjectProperty<Aeroport> aArrivee;
+    private final DoubleProperty taxAeroport;
+    private final ObservableList<Aeroport> escales;
 
     public Vol(){
         super();
-        this.taxAeroport = 0.0;
-        escales = new ArrayList<>();
+        this.aDepart = new SimpleObjectProperty<>();
+        this.aArrivee = new SimpleObjectProperty<>();
+        this.taxAeroport = new SimpleDoubleProperty(0.0);
+        this.escales = FXCollections.observableArrayList();
     }
-    public Vol(int id, double prixBase, boolean statut, Aeroport aDepart, Aeroport aArrivee, double taxAeroport) {
-        super(id, prixBase, statut);
-        this.aDepart = aDepart;
-        this.aArrivee = aArrivee;
-        this.taxAeroport = taxAeroport;
-        escales = new ArrayList<>();
+    public Vol(int id, double prixBase, Aeroport aDepart, Aeroport aArrivee, double taxAeroport) {
+        super(id, prixBase);
+        this.aDepart = new SimpleObjectProperty<>(aDepart);
+        this.aArrivee = new SimpleObjectProperty<>(aArrivee);
+        this.taxAeroport = new SimpleDoubleProperty(taxAeroport);
+        this.escales = FXCollections.observableArrayList();
     }
 
-    public void setADepart(Aeroport aDepart) {this.aDepart = aDepart;}
-    public void setaArrivee(Aeroport aArrivee) {this.aArrivee = aArrivee;}
-    public void setTaxAeroport(double taxAeroport) {this.taxAeroport = taxAeroport;}
+    public Aeroport getADepart() { return aDepart.get(); }
+    public void setADepart(Aeroport val) { this.aDepart.set(val); }
+    public ObjectProperty<Aeroport> aDepartProperty() { return aDepart; }
+    public ObservableList<Aeroport> getEscales() {
+        return escales;
+    }
 
-    public Aeroport getADepart() {return this.aDepart;}
-    public Aeroport getaArrivee() {return this.aArrivee;}
-    public double getTaxAeroport() {return this.taxAeroport;}
-    public ArrayList<Aeroport> getEscales() {return this.escales;}
+
+    public void setEscales(List<Aeroport> nouvellesEscales) {
+        this.escales.setAll(nouvellesEscales);
+    }
+
+    public Aeroport getAArrivee() { return aArrivee.get(); }
+    public void setAArrivee(Aeroport val) { this.aArrivee.set(val); }
+    public ObjectProperty<Aeroport> aArriveeProperty() { return aArrivee; }
+
+    public double getTaxAeroport() { return taxAeroport.get(); }
+    public void setTaxAeroport(double val) { this.taxAeroport.set(val); }
+    public DoubleProperty taxAeroportProperty() { return taxAeroport; }
 
     public void ajouterEscale(Aeroport aEscale) {
         escales.add(aEscale);
     }
-    public void retirerEscale(int rang) {
-        escales.remove(rang);
+
+    public void retirerEscale(Aeroport aEscale) {
+        escales.remove(aEscale);
     }
+
+
     public boolean chercherEscale(Aeroport aEscale) {
         return escales.contains(aEscale);
     }
 
-    @Override
+    /*@Override
     public void ecrire (Scanner sc){
         super.ecrire(sc);
         System.out.println("Donner le nom de l'aeroport de depart : ");
@@ -56,9 +76,9 @@ public class Vol extends ServiceVoyage{
         aArrivee = new Aeroport(nomaeroa, codeIATA2);
         System.out.println("Donner les taxes des aeroports :");
         taxAeroport = sc.nextDouble();
-    }
+    }*/
 
-    @Override
+    /*@Override
     public void afficher() {
         super.afficher();
         System.out.println("Aeroport de depart:" + aDepart.toString());
@@ -74,5 +94,5 @@ public class Vol extends ServiceVoyage{
     @Override
     public void calculerCoutTotal(double prix) {
         prix = super.getPrixBase() + taxAeroport;
-    }
+    }*/
 }

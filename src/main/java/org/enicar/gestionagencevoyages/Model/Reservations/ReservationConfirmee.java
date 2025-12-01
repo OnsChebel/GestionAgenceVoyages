@@ -11,8 +11,8 @@ public final class ReservationConfirmee extends Reservation{
         super();
         this.codeConfirmation = 0;
     }
-    public ReservationConfirmee(int idReservation, Date dateRes, int codeConfirmation) {
-        super(idReservation, dateRes);
+    public ReservationConfirmee(int idReservation,int clientId, Date dateRes, String statut, int codeConfirmation) {
+        super(idReservation, clientId, dateRes, statut);
         this.codeConfirmation = codeConfirmation;
     }
 
@@ -20,16 +20,16 @@ public final class ReservationConfirmee extends Reservation{
         return codeConfirmation;
     }
 
-    @Override
+    /*@Override
     public void ecrire(Scanner sc){
         super.ecrire(sc);
         System.out.println("Donner le code confirmation: ");
         codeConfirmation = sc.nextInt();
-    }
+    }*/
 
-    @Override
+    /*@Override
     public void afficher() {
         super.afficher();
         System.out.println("Code confirmation: " + codeConfirmation);
-    }
+    }*/
 }

@@ -10,7 +10,11 @@ module org.enicar.gestionagencevoyages {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
+    requires java.sql;
 
     opens org.enicar.gestionagencevoyages to javafx.fxml;
     exports org.enicar.gestionagencevoyages;
+
+    opens org.enicar.gestionagencevoyages.Model.Reservations to javafx.base;
+    opens org.enicar.gestionagencevoyages.Model.Personnes to javafx.base;
 }

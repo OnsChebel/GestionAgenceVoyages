@@ -1,45 +1,60 @@
 package org.enicar.gestionagencevoyages.Model.Personnes;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import java.util.ArrayList;
 import java.util.Scanner;
 import org.enicar.gestionagencevoyages.Model.Reservations.*;
 
 public sealed class Client extends Personne permits ClientPremium {
-    private Adresse adresse;
-    private ArrayList<Reservation> hisResv;
+    private final ObjectProperty<Adresse> adresse;
+    private final ObjectProperty<ObservableList<Reservation>> hisResv;
 
     public Client(){
         super();
-        this.hisResv = new ArrayList<>();
+        this.adresse = new SimpleObjectProperty<>();
+        this.hisResv = new SimpleObjectProperty<>(FXCollections.observableArrayList());
     }
-    public Client(int id, String nom, String prenom, Adresse adresse) {
-        super(id, nom, prenom, null);
-        this.adresse = adresse;
-        this.hisResv = new ArrayList<>();
+    public Client(int id, String nom, String prenom, Coordonnes coord, Adresse adresse) {
+        super(id, nom, prenom, coord);
+        this.adresse = new SimpleObjectProperty<>(adresse);
+        this.hisResv = new SimpleObjectProperty<>(FXCollections.observableArrayList());
     }
 
-    public Adresse getAdresse() {
+
+
+    public ObjectProperty<Adresse> adresseProperty() {
         return this.adresse;
     }
-    public ArrayList<Reservation> getHisResv() {return this.hisResv;}
+    public ObjectProperty<ObservableList<Reservation>> hisResvProperty() {
+        return this.hisResv;
+    }
+
+
+    public Adresse getAdresse() {return this.adresse.get();}
+    public void setAdresse(Adresse adresse) {this.adresse.set(adresse);}
+
+    public ObservableList<Reservation> getHisResv() {return this.hisResv.get();}
 
     public void ajouteHisResv(Reservation reservation) {
-        this.hisResv.add(reservation);
+        this.hisResv.get().add(reservation);
     }
     public void supprimerHisResv(int rang) {
-        this.hisResv.remove(rang);
+        this.hisResv.get().remove(rang);
     }
     public Reservation getReservation(int rang) {
-        return hisResv.get(rang);
+        return hisResv.get().get(rang);
     }
 
-    public void afficherhisResv() {
+    /*public void afficherhisResv() {
         for (Reservation resv : hisResv) {
             resv.afficher();
         }
-    }
+    }*/
 
-    @Override
+    /*@Override
     public void ecrire(Scanner sc){
         super.ecrire(sc);
         System.out.println("Donner la rue ");
@@ -50,23 +65,23 @@ public sealed class Client extends Personne permits ClientPremium {
         int codePostal = sc.nextInt();
         adresse = new Adresse(rue, ville, codePostal);
         char choix;
-        do{
+        /*do{
             Reservation res = null;
             res.ecrire(sc);
             hisResv.add(res);
             System.out.println("Voulez-vous ajouter une reservation?");
             choix = sc.next().charAt(0);
-        } while (choix == 'o' || choix == 'O');
-    }
+        } while (choix == 'o' || choix == 'O');*/
+    /*}
 
     @Override
     public void afficher() {
         super.afficher();
         System.out.println("Adresse : " + adresse.toString());
-        for(Reservation resv : hisResv) {
+        /*for(Reservation resv : hisResv) {
             resv.afficher();
-        }
-    }
+        }*/
+   /* }*/
 
 }
 
