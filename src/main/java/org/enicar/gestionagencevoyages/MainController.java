@@ -7,6 +7,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+
 
 import java.io.IOException;
 
@@ -80,4 +83,24 @@ public class MainController {
 
         }
     }
+
+    @FXML
+    public void onLogout(ActionEvent event) {
+        try {
+            Parent loginRoot = FXMLLoader.load(getClass().getResource("connexion.fxml"));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            
+            // Garder les dimensions actuelles
+            Scene currentScene = stage.getScene();
+            double width = currentScene.getWidth();
+            double height = currentScene.getHeight();
+            
+            Scene newScene = new Scene(loginRoot, width, height);
+            stage.setScene(newScene);
+            stage.setTitle("Connexion");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }
