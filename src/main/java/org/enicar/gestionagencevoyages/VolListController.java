@@ -1,23 +1,26 @@
 package org.enicar.gestionagencevoyages;
 
-import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import javafx.beans.property.ReadOnlyObjectWrapper;
+import org.enicar.gestionagencevoyages.DAO.VolDAOImpl;
 import org.enicar.gestionagencevoyages.Model.Services.Aeroport;
 import org.enicar.gestionagencevoyages.Model.Services.Vol;
 import org.enicar.gestionagencevoyages.Service.VolService;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
-import java.util.stream.Collectors;
 
 public class VolListController implements Initializable {
 
@@ -30,100 +33,145 @@ public class VolListController implements Initializable {
     @FXML private TableColumn<Vol, ObservableList<Aeroport>> escalesColumn;
     @FXML private TableColumn<Vol, Double> totalColumn;
 
-    private final VolService volService = new VolService();
-    private int currentReservationId;
+    @FXML private Button ajouterVolButton;
+    @FXML private Button retourButton;
 
+    private final VolService volService = new VolService();
+    private int currentReservationId = 0;
 
     public void initData(int reservationId) {
         this.currentReservationId = reservationId;
-        volTable.setItems(volService.getVolsForReservation(reservationId));
+        rafraichirLaListe();
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        idColumn.setCellValueFactory(cellData -> cellData.getValue().idProperty().asObject());
-        prixColumn.setCellValueFactory(cellData -> cellData.getValue().prixBaseProperty().asObject());
+
+        // Colonnes simples
+        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        prixColumn.setCellValueFactory(new PropertyValueFactory<>("prixBase"));
         taxeColumn.setCellValueFactory(cellData -> cellData.getValue().taxAeroportProperty().asObject());
+
+        // Colonnes aéroports
         departColumn.setCellValueFactory(cellData -> cellData.getValue().aDepartProperty());
-        arriveeColumn.setCellValueFactory(cellData -> cellData.getValue().aArriveeProperty());
-        escalesColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getEscales()));
-
-        totalColumn.setCellValueFactory(cellData -> {
-            Vol v = cellData.getValue();
-            double total = v.getPrixBase() + v.getTaxAeroport();
-            return new SimpleObjectProperty<>(total);
-        });
-
-        departColumn.setCellFactory(col -> new TableCell<>() {
-            @Override protected void updateItem(Aeroport item, boolean empty) {
-                super.updateItem(item, empty);
-                setText((empty || item == null) ? "" : item.nom() + " (" + item.codeIATA() + ")");
-            }
-        });
-
-        arriveeColumn.setCellFactory(col -> new TableCell<>() {
-            @Override protected void updateItem(Aeroport item, boolean empty) {
-                super.updateItem(item, empty);
-                setText((empty || item == null) ? "" : item.nom() + " (" + item.codeIATA() + ")");
-            }
-        });
-
-        escalesColumn.setCellFactory(col -> new TableCell<>() {
+        departColumn.setCellFactory(col -> new TableCell<Vol, Aeroport>() {
             @Override
-            protected void updateItem(ObservableList<Aeroport> list, boolean empty) {
-                super.updateItem(list, empty);
-                if (empty) {
-                    setText(null);
-                    setGraphic(null);
-                }
-                else {
-                    if (list == null || list.isEmpty()) {
-                        setText("Direct");
+            protected void updateItem(Aeroport a, boolean empty) {
+                super.updateItem(a, empty);
+                setText(empty || a == null ? "" : a.nom() + " (" + a.codeIATA() + ")");
+            }
+        });
+
+        arriveeColumn.setCellValueFactory(cellData -> cellData.getValue().aArriveeProperty());
+        arriveeColumn.setCellFactory(col -> new TableCell<Vol, Aeroport>() {
+            @Override
+            protected void updateItem(Aeroport a, boolean empty) {
+                super.updateItem(a, empty);
+                setText(empty || a == null ? "" : a.nom() + " (" + a.codeIATA() + ")");
+            }
+        });
+
+        // Escales
+        escalesColumn.setCellValueFactory(cellData ->
+                new ReadOnlyObjectWrapper<>(cellData.getValue().getEscales())
+        );        escalesColumn.setCellFactory(col -> new TableCell<Vol, ObservableList<Aeroport>>() {
+            @Override
+            protected void updateItem(ObservableList<Aeroport> escales, boolean empty) {
+                super.updateItem(escales, empty);
+                if (empty || escales == null || escales.isEmpty()) {
+                    setText("");
+                } else {
+                    StringBuilder sb = new StringBuilder();
+                    for (Aeroport a : escales) {
+                        sb.append(a.nom()).append(" (").append(a.codeIATA()).append("), ");
                     }
-                    else {
-                        String text = list.stream()
-                                .map(Aeroport::codeIATA)
-                                .collect(Collectors.joining(", "));
-                        setText(text);
-                    }
+                    sb.setLength(sb.length() - 2); // retire la dernière virgule
+                    setText(sb.toString());
                 }
             }
         });
 
-        totalColumn.setCellFactory(col -> new TableCell<>() {
-            @Override protected void updateItem(Double item, boolean empty) {
-                super.updateItem(item, empty);
-                if (empty || item == null) {
-                    setText(null);
-                } else {
-                    setText(String.format("%.2f DT", item));
-                }
+        // Total
+        totalColumn.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getTotal()).asObject());
+        totalColumn.setCellFactory(col -> new TableCell<Vol, Double>() {
+            @Override
+            protected void updateItem(Double total, boolean empty) {
+                super.updateItem(total, empty);
+                setText(empty || total == null ? "" : String.format("%.2f", total));
             }
         });
+
+        // Colonne Action (Supprimer)
+        addDeleteColumn();
+
+        // Rafraichir la liste
+        rafraichirLaListe();
     }
 
-    @FXML
-    private void handleAjouterVol() {
+    private void addDeleteColumn() {
+        TableColumn<Vol, Void> colAction = new TableColumn<>("Action");
+        colAction.setCellFactory(param -> new TableCell<>() {
+
+            private final Button btn = new Button("Supprimer");
+
+            {
+                btn.setStyle("-fx-background-color: #ff4444; -fx-text-fill: white;");
+                btn.setOnAction(event -> {
+                    Vol v = getTableView().getItems().get(getIndex());
+                    onDeleteVol(v);
+                });
+            }
+
+            @Override protected void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+                setGraphic(empty ? null : btn);
+            }
+        });
+
+        volTable.getColumns().add(colAction);
+    }
+
+    private void onDeleteVol(Vol vol) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
+                "Voulez-vous supprimer le vol #" + vol.getId() + " ?",
+                ButtonType.OK, ButtonType.CANCEL);
+
+        alert.setTitle("Confirmation");
+        alert.setHeaderText("Supprimer le vol");
+
+        if (alert.showAndWait().orElse(ButtonType.CANCEL) == ButtonType.OK) {
+            new VolDAOImpl().deleteVol(vol.getId());
+            rafraichirLaListe();
+        }
+    }
+
+    private void rafraichirLaListe() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("ajouter-vol.fxml"));
-            Parent root = loader.load();
-            VolController controller = loader.getController();
-            controller.setReservationId(this.currentReservationId);
-            Stage stage = (Stage) volTable.getScene().getWindow();
-            stage.getScene().setRoot(root);
-        } catch (IOException e) {
+            List<Vol> list = (currentReservationId != 0)
+                    ? volService.getVolsForReservation(currentReservationId)
+                    : volService.getAllVols();
+
+            volTable.setItems(FXCollections.observableArrayList(list));
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     @FXML
-    private void handleRetour() {
+    private void handleAjouterVol(ActionEvent event) {
+        handleRetour(event);
+    }
+
+    @FXML
+    private void handleRetour(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("reservation-list.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("main.fxml"));
             Parent root = loader.load();
-            Stage stage = (Stage) volTable.getScene().getWindow();
-            stage.setTitle("Liste des réservations");
+
+            Stage stage = (Stage) retourButton.getScene().getWindow();
             stage.getScene().setRoot(root);
+            stage.setTitle("Le Bon Voyage");
         } catch (IOException e) {
             e.printStackTrace();
         }

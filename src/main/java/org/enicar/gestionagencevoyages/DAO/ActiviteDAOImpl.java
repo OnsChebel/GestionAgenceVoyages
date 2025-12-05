@@ -61,4 +61,14 @@ public class ActiviteDAOImpl implements ActiviteDAO {
             return new Date(Integer.parseInt(parts[0]), Integer.parseInt(parts[1]), Integer.parseInt(parts[2]));
         } catch (Exception e) { return new Date(1,1,2025); }
     }
+
+    @Override
+    public void deleteActivite(int activiteId) {
+        String sql = "DELETE FROM Activite WHERE id = ?";
+        try (Connection conn = databaseManager.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, activiteId);
+            pstmt.executeUpdate();
+        } catch (SQLException e) { e.printStackTrace(); }
+    }
 }

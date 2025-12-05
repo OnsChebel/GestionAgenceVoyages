@@ -41,7 +41,6 @@ public class MainController {
             Stage stage = (Stage) reservationsButton.getScene().getWindow();
             stage.setTitle("Gestion des Réservations");
             stage.getScene().setRoot(root);
-            // stage.sizeToScene(); // Optionnel : ajuster la taille à la nouvelle scène
         } catch (IOException e) {
             System.err.println("Erreur lors du chargement de l'interface des réservations.");
             e.printStackTrace();
@@ -90,7 +89,6 @@ public class MainController {
             Parent loginRoot = FXMLLoader.load(getClass().getResource("connexion.fxml"));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             
-            // Garder les dimensions actuelles
             Scene currentScene = stage.getScene();
             double width = currentScene.getWidth();
             double height = currentScene.getHeight();

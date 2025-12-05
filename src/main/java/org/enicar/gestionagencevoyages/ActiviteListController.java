@@ -4,10 +4,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import org.enicar.gestionagencevoyages.Model.Personnes.Date;
 import org.enicar.gestionagencevoyages.Model.Services.Activite;
 import org.enicar.gestionagencevoyages.Service.ActiviteService;
@@ -36,7 +35,6 @@ public class ActiviteListController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // 1. Liaison des données (Data Binding)
         idColumn.setCellValueFactory(cellData -> cellData.getValue().idProperty().asObject());
         intituleColumn.setCellValueFactory(cellData -> cellData.getValue().intituleProperty());
         dateColumn.setCellValueFactory(cellData -> cellData.getValue().dateProperty());

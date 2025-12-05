@@ -31,7 +31,7 @@
       </HBox>
       <HBox alignment="CENTER" layoutX="25.0" layoutY="314.0" prefHeight="28.0" prefWidth="566.0" spacing="30.0">
          <children>
-             <Button onAction="#handleVoirVols" text="Gérer Vols" />
+            <Button fx:id="gererVolsButton" onAction="#handleVoirVols" text="Gérer Vols" />
             <Button onAction="#handleVoirAccomodations" text="Gérer accomodations" />
             <Button onAction="#handleVoirActivites" text="Gérer activités" />
             <Button onAction="#handleVoirTransports" text="Gérer transport" />

@@ -93,7 +93,27 @@ public class ClientDAOImpl implements ClientDAO {
         }
     }
 
+    @Override
+    public void deleteClient(int id) {
+        String sql = "DELETE FROM Client WHERE id = ?";
+
+        try (Connection conn = databaseManager.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, id);
+            int affectedRows = pstmt.executeUpdate();
+
+            if (affectedRows > 0) {
+                System.out.println("Client" + id + " supprime avec succes");
+            } else {
+                System.out.println("Aucun client trouve avec l identifiant : " + id);
+            }
+        } catch (SQLException e) {
+            System.err.println("Erreur SQL lors de la suppression du client : " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
     @Override public Client getClientById(int id) { return null; }
     @Override public void updateClient(Client client) {}
-    @Override public void deleteClient(int id) { }
 }

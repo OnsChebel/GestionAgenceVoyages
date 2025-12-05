@@ -67,9 +67,25 @@ public class ReservationDAOImpl implements ReservationDAO {
     }
 
     @Override
-    public void deleteReservation(int id) {
-    }
+    public void deleteReservation(int idReservation) {
+        String sql = "DELETE FROM Reservation WHERE idReservation = ?";
 
+        try (Connection conn = databaseManager.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, idReservation);
+            int affected = pstmt.executeUpdate();
+            if (affected > 0) {
+                System.out.println("Réservation supprimée. ID=" + idReservation);
+            } else {
+                System.out.println("Aucune réservation trouvée pour ID=" + idReservation);
+            }
+        } catch (SQLException e) {
+            System.err.println("Erreur SQL lors de la suppression de la réservation : " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+// ...existing code...
     private Date parseDate(String dateStr) {
         if (dateStr == null || !dateStr.contains("/")) return new Date(1, 1, 2000);
         try {

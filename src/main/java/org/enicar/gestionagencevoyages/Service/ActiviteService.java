@@ -18,4 +18,8 @@ public class ActiviteService {
         List<Activite> list = activiteDAO.getActivitesByReservation(reservationId);
         return FXCollections.observableArrayList(list);
     }
+
+    public void deleteActivite(int activiteId) {
+        activiteDAO.deleteActivite(activiteId);
+    }
 }
