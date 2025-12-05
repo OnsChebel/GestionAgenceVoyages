@@ -1,14 +1,13 @@
 package org.enicar.gestionagencevoyages;
 
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import org.enicar.gestionagencevoyages.Model.Services.Accomodation;
 import org.enicar.gestionagencevoyages.Service.AccomodationService;
@@ -31,10 +30,9 @@ public class AccomodationListController implements Initializable {
     private final AccomodationService service = new AccomodationService();
     private int currentReservationId;
 
-
     public void initData(int reservationId) {
         this.currentReservationId = reservationId;
-        accTable.setItems(service.getAccomodationsForReservation(reservationId));
+        rafraichirLaListe();
     }
 
     @Override
@@ -43,14 +41,8 @@ public class AccomodationListController implements Initializable {
         typeColumn.setCellValueFactory(cellData -> cellData.getValue().typeProperty());
         adresseColumn.setCellValueFactory(cellData -> cellData.getValue().adresseProperty());
         prixColumn.setCellValueFactory(cellData -> cellData.getValue().prixBaseProperty().asObject());
-
         supplementsColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getServicesIncluts()));
-
-        totalColumn.setCellValueFactory(cellData -> {
-            Accomodation acc = cellData.getValue();
-            double total = acc.getPrixBase() + acc.getTarifsSupp();
-            return new SimpleObjectProperty<>(total);
-        });
+        totalColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getPrixBase() + cellData.getValue().getTarifsSupp()));
 
         prixColumn.setCellFactory(col -> new TableCell<>() {
             @Override protected void updateItem(Double item, boolean empty) {
@@ -73,18 +65,51 @@ public class AccomodationListController implements Initializable {
                 if (empty || list == null) {
                     setText(null);
                     setGraphic(null);
-                }
-                else {
-                    if (list.isEmpty()) {
-                        setText("Aucun");
-                    }
-                    else {
-                        String text = list.stream().collect(Collectors.joining(", "));
-                        setText(text);
-                    }
+                } else {
+                    setText(list.isEmpty() ? "Aucun" : list.stream().collect(Collectors.joining(", ")));
                 }
             }
         });
+
+        addDeleteColumn();
+    }
+
+    private void rafraichirLaListe() {
+        ObservableList<Accomodation> list = FXCollections.observableArrayList(
+                service.getAccomodationsForReservation(currentReservationId)
+        );
+        accTable.setItems(list);
+    }
+
+    private void addDeleteColumn() {
+        TableColumn<Accomodation, Void> colAction = new TableColumn<>("Action");
+        colAction.setCellFactory(param -> new TableCell<>() {
+            private final Button btn = new Button("Supprimer");
+            {
+                btn.setStyle("-fx-background-color: #ff4444; -fx-text-fill: white;");
+                btn.setOnAction(event -> {
+                    Accomodation acc = getTableView().getItems().get(getIndex());
+                    onDeleteAccomodation(acc);
+                });
+            }
+            @Override
+            protected void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+                setGraphic(empty ? null : btn);
+            }
+        });
+        accTable.getColumns().add(colAction);
+    }
+
+    private void onDeleteAccomodation(Accomodation acc) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation de suppression");
+        alert.setHeaderText("Supprimer l'hébergement");
+        alert.setContentText("Êtes-vous sûr de vouloir supprimer " + acc.getNom() + " ?");
+        if (alert.showAndWait().orElse(ButtonType.CANCEL) == ButtonType.OK) {
+            service.deleteAccomodation(acc.getId());
+            rafraichirLaListe();
+        }
     }
 
     @FXML

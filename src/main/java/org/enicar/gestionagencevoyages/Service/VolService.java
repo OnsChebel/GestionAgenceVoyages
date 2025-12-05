@@ -14,6 +14,10 @@ public class VolService {
         return FXCollections.observableArrayList(volDAO.getVolsByReservation(reservationId));
     }
 
+    public ObservableList<Vol> getAllVols() {
+        return FXCollections.observableArrayList(volDAO.getAllVols());
+    }
+
     public void addVol(Vol vol, int reservationId) {
         volDAO.addVol(vol, reservationId);
     }

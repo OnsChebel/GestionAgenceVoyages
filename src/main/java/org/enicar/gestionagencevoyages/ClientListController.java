@@ -11,10 +11,14 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.collections.FXCollections;
+import javafx.util.Callback;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 
 import org.enicar.gestionagencevoyages.Model.Personnes.Adresse;
 import org.enicar.gestionagencevoyages.Model.Personnes.Client;
 import org.enicar.gestionagencevoyages.Model.Personnes.Coordonnes;
+import org.enicar.gestionagencevoyages.DAO.ClientDAOImpl;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -32,8 +36,8 @@ public class ClientListController implements Initializable{
     @FXML private TableColumn<Client, Integer> idColumn;
     @FXML private TableColumn<Client, String> nomColumn;
     @FXML private TableColumn<Client, String> prenomColumn;
-    @FXML private TableColumn<Client, Coordonnes> coordColumn; // Type Object
-    @FXML private TableColumn<Client, Adresse> adresseColumn;   // Type Object
+    @FXML private TableColumn<Client, Coordonnes> coordColumn;
+    @FXML private TableColumn<Client, Adresse> adresseColumn;
     @FXML private TableColumn<Client, String> hisResvColumn;
 
     @FXML
@@ -73,8 +77,57 @@ public class ClientListController implements Initializable{
             }
         });
 
+        addDeleteColumn();
+        
         rafraichirLaListe();
     }
+
+    private void addDeleteColumn() {
+        TableColumn<Client, Void> colAction = new TableColumn<>("Action");
+        
+        Callback<TableColumn<Client, Void>, TableCell<Client, Void>> cellFactory = 
+            new Callback<TableColumn<Client, Void>, TableCell<Client, Void>>() {
+                @Override
+                public TableCell<Client, Void> call(TableColumn<Client, Void> param) {
+                    return new TableCell<Client, Void>() {
+                        private final Button btn = new Button("Supprimer");
+                        {
+                            btn.setStyle("-fx-background-color: #ff4444; -fx-text-fill: white;");
+                            btn.setOnAction(event -> {
+                                Client client = getTableView().getItems().get(getIndex());
+                                onDeleteClient(client);
+                            });
+                        }
+
+                        @Override
+                        public void updateItem(Void item, boolean empty) {
+                            super.updateItem(item, empty);
+                            if (empty) {
+                                setGraphic(null);
+                            } else {
+                                setGraphic(btn);
+                            }
+                        }
+                    };
+                }
+            };
+        
+        colAction.setCellFactory(cellFactory);
+        clientTable.getColumns().add(colAction);
+    }
+
+    private void onDeleteClient(Client client) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation de suppression");
+        alert.setHeaderText("Supprimer le client");
+        alert.setContentText("Êtes-vous sûr de vouloir supprimer " + client.getPrenom() + " " + client.getNom() + " ?");
+        if (alert.showAndWait().get() == ButtonType.OK) {
+            ClientDAOImpl clientDAO = new ClientDAOImpl();
+            clientDAO.deleteClient(client.getId());
+            rafraichirLaListe();
+        }
+    }
+
     private void rafraichirLaListe() {
         clientTable.setItems(clientService.getClients());
     }
@@ -90,8 +143,6 @@ public class ClientListController implements Initializable{
         } catch (IOException e) {
             System.err.println("Erreur lors du chargement de l'interface principale");
             e.printStackTrace();
-
         }
     }
-
 }

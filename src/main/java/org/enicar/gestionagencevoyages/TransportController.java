@@ -7,7 +7,6 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.enicar.gestionagencevoyages.Model.Services.Transport;
 import org.enicar.gestionagencevoyages.Service.TransportService;
-import org.enicar.gestionagencevoyages.TransportListController;
 
 import java.io.IOException;
 
@@ -20,9 +19,7 @@ public class TransportController {
     private final TransportService service = new TransportService();
     private int reservationId;
 
-    public void setReservationId(int id) {
-        this.reservationId = id;
-    }
+    public void setReservationId(int id) { this.reservationId = id; }
 
     @FXML
     private void handleEnregistrer() {
@@ -37,9 +34,7 @@ public class TransportController {
 
         } catch (NumberFormatException e) {
             System.err.println("Erreur : Le prix doit être un nombre valide.");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        } catch (Exception e) { e.printStackTrace(); }
     }
 
     @FXML
@@ -53,8 +48,6 @@ public class TransportController {
 
             Stage stage = (Stage) idField.getScene().getWindow();
             stage.getScene().setRoot(root);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        } catch (IOException e) { e.printStackTrace(); }
     }
 }

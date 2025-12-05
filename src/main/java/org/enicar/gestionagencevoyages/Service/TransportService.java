@@ -13,4 +13,6 @@ public class TransportService {
     public ObservableList<Transport> getTransports(int resId) {
         return FXCollections.observableArrayList(dao.getTransportsByReservation(resId));
     }
+
+    public void deleteTransport(int transportId) { dao.deleteTransport(transportId); }
 }

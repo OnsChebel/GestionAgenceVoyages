@@ -20,4 +20,8 @@ public class AccomodationService {
         List<Accomodation> list = accomodationDAO.getAccomodationsByReservation(reservationId);
         return FXCollections.observableArrayList(list);
     }
+
+    public void deleteAccomodation(int id) {
+        accomodationDAO.deleteAccomodation(id);
+    }
 }

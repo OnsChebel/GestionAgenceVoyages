@@ -85,7 +85,6 @@ public class Gestionnaire extends Personne implements CalculSalaire {
     }
 
     public void ecrire(Scanner sc) {
-        //super.ecrire(sc);
         System.out.println("Donner la date de prise de fonction:");
         System.out.print("jour: ");
         int j = sc.nextInt();
@@ -100,7 +99,6 @@ public class Gestionnaire extends Personne implements CalculSalaire {
         char choix;
         do{
             Reservation res = new Reservation();
-            //res.ecrire(sc);
             ajouterReservation(res);
             System.out.println("Y a-t-il d'autres reservations? :");
             choix = sc.next().charAt(0);
@@ -109,7 +107,6 @@ public class Gestionnaire extends Personne implements CalculSalaire {
         char choix2;
         do{
             Client cli = new Client();
-            //cli.ecrire(sc);
             ajouterClient(cli);
             System.out.println("Y a-t-il d'autres clients? :");
             choix2 = sc.next().charAt(0);
@@ -119,7 +116,6 @@ public class Gestionnaire extends Personne implements CalculSalaire {
         setBonus();
     }
     public void afficher() {
-        //super.afficher();
         System.out.println("Poste: " + poste);
         System.out.println("Date de prise de fonction: " + priseFonct.toString());
         System.out.println("Salaire: " + salairefixe);

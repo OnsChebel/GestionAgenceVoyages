@@ -1,8 +1,6 @@
 package org.enicar.gestionagencevoyages.Model.Reservations;
 
-import java.util.HashMap;
-//import java.util.Scanner;
-import org.enicar.gestionagencevoyages.Model.Services.*;
+import java.util.HashMap;import org.enicar.gestionagencevoyages.Model.Services.*;
 import org.enicar.gestionagencevoyages.Model.Personnes.Date;
 import javafx.beans.property.*;
 

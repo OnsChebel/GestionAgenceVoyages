@@ -61,6 +61,11 @@ public class Vol extends ServiceVoyage{
         return escales.contains(aEscale);
     }
 
+    public double getTotal() {
+    return prixBase.get() + taxAeroport.get();
+    }
+
+
     /*@Override
     public void ecrire (Scanner sc){
         super.ecrire(sc);

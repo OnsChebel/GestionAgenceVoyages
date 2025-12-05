@@ -70,6 +70,42 @@ public class VolDAOImpl implements VolDAO {
     }
 
     @Override
+    public List<Vol> getAllVols() {
+        List<Vol> vols = new ArrayList<>();
+        String sql = "SELECT * FROM Vol";
+
+        try (Connection conn = databaseManager.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);
+             ResultSet rs = pstmt.executeQuery()) {
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String departNom = rs.getString("depart_nom");
+                String departCode = rs.getString("depart_code");
+                String arriveeNom = rs.getString("arrivee_nom");
+                String arriveeCode = rs.getString("arrivee_code");
+                double taxAeroport = rs.getDouble("taxAeroport");
+                double prixBase = rs.getDouble("prixBase");
+
+                Aeroport aDepart = new Aeroport(departNom, departCode);
+                Aeroport aArrivee = new Aeroport(arriveeNom, arriveeCode);
+
+                Vol v = new Vol();
+                v.setId(id);
+                v.setADepart(aDepart);
+                v.setAArrivee(aArrivee);
+                v.setTaxAeroport(taxAeroport);
+                v.setPrixBase(prixBase);
+                v.setEscales(getEscalesForVol(conn, id));
+                vols.add(v);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return vols;
+    }
+
+    @Override
     public List<Vol> getVolsByReservation(int reservationId) {
         List<Vol> vols = new ArrayList<>();
         String sql = "SELECT * FROM Vol WHERE reservation_id = ?";
@@ -123,5 +159,21 @@ public class VolDAOImpl implements VolDAO {
     }
 
     @Override
-    public void deleteVol(int id){}
+    public void deleteVol(int id) {
+        String sql = "DELETE FROM Vol WHERE id = ?";
+
+        try (Connection conn = databaseManager.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, id);
+            int affected = pstmt.executeUpdate();
+            if (affected > 0) {
+                System.out.println("Vol supprimé. ID=" + id);
+            } else {
+                System.out.println("Aucun vol trouvé pour ID=" + id);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

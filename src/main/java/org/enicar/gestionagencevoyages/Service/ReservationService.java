@@ -2,9 +2,12 @@ package org.enicar.gestionagencevoyages.Service;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
 import org.enicar.gestionagencevoyages.DAO.ReservationDAO;
 import org.enicar.gestionagencevoyages.DAO.ReservationDAOImpl;
 import org.enicar.gestionagencevoyages.Model.Reservations.Reservation;
+
+import java.util.List;
 
 public class ReservationService {
 
@@ -28,5 +31,9 @@ public class ReservationService {
         if (reservation.getIdReservation() > 0) {
             this.reservations.add(reservation);
         }
+    }
+
+    public void removeFromCache(Reservation reservation) {
+        this.reservations.remove(reservation);
     }
 }

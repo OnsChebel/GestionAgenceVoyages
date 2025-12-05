@@ -8,4 +8,5 @@ public interface VolDAO {
     void addVol(Vol vol, int reservationId);
     List<Vol> getVolsByReservation(int reservationId);
     void deleteVol(int id);
+    List<Vol> getAllVols();
 }

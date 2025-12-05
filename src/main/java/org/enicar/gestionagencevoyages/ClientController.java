@@ -19,7 +19,6 @@ public class ClientController {
 
     private final ClientService clientService = new ClientService();
 
-    // Champs FXML (Correspondant aux fx:id)
     @FXML private TextField idField;
     @FXML private TextField prenomField;
     @FXML private TextField nomField;

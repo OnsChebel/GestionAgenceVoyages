@@ -18,19 +18,13 @@ public class TransportDAOImpl implements TransportDAO {
             pstmt.setString(1, t.getType());
             pstmt.setDouble(2, t.getPrixBase());
             pstmt.setInt(3, reservationId);
-
             pstmt.executeUpdate();
-
 
             try (Statement stmt = conn.createStatement();
                  ResultSet rs = stmt.executeQuery("SELECT last_insert_rowid()")) {
-                if (rs.next()) {
-                    t.setId(rs.getInt(1));
-                }
+                if (rs.next()) t.setId(rs.getInt(1));
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        } catch (SQLException e) { e.printStackTrace(); }
     }
 
     @Override
@@ -42,7 +36,6 @@ public class TransportDAOImpl implements TransportDAO {
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setInt(1, reservationId);
-
             try (ResultSet rs = pstmt.executeQuery()) {
                 while (rs.next()) {
                     Transport t = new Transport(
@@ -53,9 +46,17 @@ public class TransportDAOImpl implements TransportDAO {
                     list.add(t);
                 }
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        } catch (SQLException e) { e.printStackTrace(); }
         return list;
+    }
+
+    @Override
+    public void deleteTransport(int transportId) {
+        String sql = "DELETE FROM Transport WHERE id = ?";
+        try (Connection conn = databaseManager.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, transportId);
+            pstmt.executeUpdate();
+        } catch (SQLException e) { e.printStackTrace(); }
     }
 }

@@ -6,4 +6,5 @@ import java.util.List;
 public interface TransportDAO {
     void addTransport(Transport t, int reservationId);
     List<Transport> getTransportsByReservation(int reservationId);
+    void deleteTransport(int transportId);
 }

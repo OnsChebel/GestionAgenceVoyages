@@ -32,7 +32,6 @@ public class AccomodationController {
         typeChoiceBox.setValue("Hôtel");
 
         listSuppAcc.getItems().addAll("Chambre individuelle", "Pension complete", "Spa", "Baby sitter");
-
         listSuppAcc.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
         prixField.textProperty().addListener(o -> calculerTotal());
@@ -44,10 +43,12 @@ public class AccomodationController {
             double prixBase = prixField.getText().isEmpty() ? 0 : Double.parseDouble(prixField.getText());
             double supp = 0;
             for (String item : listSuppAcc.getSelectionModel().getSelectedItems()) {
-                if (item.equals("Chambre individuelle")) supp += 100;
-                if (item.equals("Pension complete")) supp += 190;
-                if (item.equals("Spa")) supp += 225;
-                if (item.equals("Baby sitter")) supp += 300;
+                switch (item) {
+                    case "Chambre individuelle" -> supp += 100;
+                    case "Pension complete" -> supp += 190;
+                    case "Spa" -> supp += 225;
+                    case "Baby sitter" -> supp += 300;
+                }
             }
             tarifsSuppField.setText(String.valueOf(supp));
             totalField.setText(String.format("%.2f", prixBase + supp));
@@ -63,15 +64,16 @@ public class AccomodationController {
             String nom = nomField.getText();
             String type = typeChoiceBox.getValue();
             String adresse = adresseField.getText();
-            Accomodation acc = new Accomodation(0, prix, nom, type, adresse);
 
+            Accomodation acc = new Accomodation(0, prix, nom, type, adresse);
             acc.getServicesIncluts().addAll(listSuppAcc.getSelectionModel().getSelectedItems());
             acc.recalculerTarifsSupp();
 
             service.addAccomodation(acc, reservationId);
-
             retourALaListe();
-        } catch (Exception e) { e.printStackTrace(); }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void retourALaListe() {
