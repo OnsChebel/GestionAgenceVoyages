@@ -3,6 +3,7 @@ package org.enicar.gestionagencevoyages;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.enicar.gestionagencevoyages.Model.Personnes.Date;
@@ -13,10 +14,11 @@ import java.io.IOException;
 
 public class ActiviteController {
 
-    @FXML private TextField idField;
-    @FXML private TextField prixField;
     @FXML private TextField intituleField;
-    @FXML private TextField dateField;
+    @FXML private TextField prixField;
+    @FXML private TextField jourField;
+    @FXML private TextField moisField;
+    @FXML private TextField anneeField;
     @FXML private TextField horaireField;
     @FXML private TextField dureeField;
 
@@ -30,38 +32,25 @@ public class ActiviteController {
     @FXML
     private void handleEnregistrer() {
         try {
-            double prix = Double.parseDouble(prixField.getText().replace(",", "."));
             String intitule = intituleField.getText();
+            double prix = Double.parseDouble(prixField.getText().replace(",", "."));
+            int jour = Integer.parseInt(jourField.getText());
+            int mois = Integer.parseInt(moisField.getText());
+            int annee = Integer.parseInt(anneeField.getText());
             int horaire = Integer.parseInt(horaireField.getText());
             int duree = Integer.parseInt(dureeField.getText());
 
-            Date dateActivite = parseDate(dateField.getText());
+            Date date = new Date(jour, mois, annee);
+            Activite a = new Activite(0, prix, intitule, date, horaire, duree);
 
-            Activite activite = new Activite(0, prix, intitule, dateActivite, horaire, duree);
-
-            service.addActivite(activite, reservationId);
+            service.addActivite(a, reservationId);
             System.out.println("Activité ajoutée !");
-
             handleRetour();
 
         } catch (NumberFormatException e) {
-            System.err.println("Erreur : Vérifiez que le prix, l'horaire et la durée sont des nombres.");
+            System.err.println("Erreur : Veuillez entrer des nombres valides.");
         } catch (Exception e) {
             e.printStackTrace();
-        }
-    }
-
-    private Date parseDate(String dateText) {
-        try {
-            String[] parts = dateText.split("/");
-            return new Date(
-                    Integer.parseInt(parts[0]),
-                    Integer.parseInt(parts[1]),
-                    Integer.parseInt(parts[2])
-            );
-        } catch (Exception e) {
-            System.err.println("Format de date invalide. Utilisation date par défaut.");
-            return new Date(1, 1, 2025);
         }
     }
 
@@ -74,10 +63,13 @@ public class ActiviteController {
             ActiviteListController controller = loader.getController();
             controller.initData(this.reservationId);
 
-            Stage stage = (Stage) idField.getScene().getWindow();
+            Stage stage = (Stage) intituleField.getScene().getWindow();
             stage.getScene().setRoot(root);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+    @FXML private TableColumn<Activite, Double> totalColumn;
+
 }

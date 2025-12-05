@@ -33,7 +33,7 @@
          <children>
             <Button fx:id="gererVolsButton" onAction="#handleVoirVols" text="Gérer Vols" />
             <Button onAction="#handleVoirAccomodations" text="Gérer accomodations" />
-            <Button onAction="#handleVoirActivites" text="Gérer activités" />
+            <Button text="Gérer Activités" onAction="#handleVoirActivites"/>
             <Button onAction="#handleVoirTransports" text="Gérer transport" />
          </children>
       </HBox>
