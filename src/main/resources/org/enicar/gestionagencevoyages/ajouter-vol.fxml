@@ -8,14 +8,14 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.enicar.gestionagencevoyages.VolController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.enicar.gestionagencevoyages.Controllers.VolController">
    <children>
-      <Text layoutX="204.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ajouter un vol">
+      <Text layoutX="204.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ajouter un vol">
          <font>
             <Font name="Broadway" size="25.0" />
          </font>
       </Text>
-      <VBox layoutX="265.0" layoutY="86.0" prefHeight="278.0" prefWidth="162.0" spacing="15.0">
+      <VBox layoutX="265.0" layoutY="67.0" prefHeight="278.0" prefWidth="162.0" spacing="10.0">
          <children>
             <TextField fx:id="idField" disable="true" />
             <TextField fx:id="prixField" promptText="0.0" />
@@ -26,7 +26,7 @@
             <TextField fx:id="totalField" disable="true" />
          </children>
       </VBox>
-      <VBox alignment="TOP_RIGHT" layoutX="142.0" layoutY="86.0" prefHeight="278.0" prefWidth="100.0" spacing="25.0">
+      <VBox alignment="TOP_RIGHT" layoutX="142.0" layoutY="71.0" prefHeight="278.0" prefWidth="100.0" spacing="27.0">
          <children>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Id service:" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Prix base:" />
@@ -37,10 +37,10 @@
             <Text text="Total:" />
          </children>
       </VBox>
-      <HBox alignment="TOP_CENTER" layoutX="253.0" layoutY="367.0" prefHeight="28.0" prefWidth="162.0" spacing="30.0">
+      <HBox alignment="TOP_CENTER" layoutX="253.0" layoutY="367.0" prefHeight="34.0" prefWidth="192.0" spacing="30.0" translateX="-30.0">
          <children>
             <Button fx:id="enregistrerButton" mnemonicParsing="false" onAction="#handleEnregistrer" text="Enregistrer" />
-            <Button mnemonicParsing="false" onAction="#retourALaListe" text="Retour" />
+            <Button mnemonicParsing="false" onAction="#handleRetour" text="Retour" />
          </children>
       </HBox>
    </children>

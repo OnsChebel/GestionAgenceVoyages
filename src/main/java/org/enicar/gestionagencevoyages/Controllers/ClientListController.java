@@ -1,4 +1,4 @@
-package org.enicar.gestionagencevoyages;
+package org.enicar.gestionagencevoyages.Controllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,7 +10,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.collections.FXCollections;
 import javafx.util.Callback;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -18,7 +17,6 @@ import javafx.scene.control.ButtonType;
 import org.enicar.gestionagencevoyages.Model.Personnes.Adresse;
 import org.enicar.gestionagencevoyages.Model.Personnes.Client;
 import org.enicar.gestionagencevoyages.Model.Personnes.Coordonnes;
-import org.enicar.gestionagencevoyages.DAO.ClientDAOImpl;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -32,6 +30,7 @@ public class ClientListController implements Initializable{
 
     @FXML private Button ajouterClientButton;
     @FXML private Button menuButton;
+    @FXML private Button reservationsButton;
     @FXML private TableView<Client> clientTable;
     @FXML private TableColumn<Client, Integer> idColumn;
     @FXML private TableColumn<Client, String> nomColumn;
@@ -43,7 +42,7 @@ public class ClientListController implements Initializable{
     @FXML
     private void handleAjouterClientAction() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("hello-view.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/enicar/gestionagencevoyages/hello-view.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) ajouterClientButton.getScene().getWindow();
             stage.setTitle("Ajout de client");
@@ -122,9 +121,7 @@ public class ClientListController implements Initializable{
         alert.setHeaderText("Supprimer le client");
         alert.setContentText("Êtes-vous sûr de vouloir supprimer " + client.getPrenom() + " " + client.getNom() + " ?");
         if (alert.showAndWait().get() == ButtonType.OK) {
-            ClientDAOImpl clientDAO = new ClientDAOImpl();
-            clientDAO.deleteClient(client.getId());
-            rafraichirLaListe();
+            clientService.deleteClient(client);
         }
     }
 
@@ -135,7 +132,7 @@ public class ClientListController implements Initializable{
     @FXML
     private void handleMenuAction() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("main.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/enicar/gestionagencevoyages/main.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) menuButton.getScene().getWindow();
             stage.setTitle("Le Bon Voyage");
@@ -143,6 +140,23 @@ public class ClientListController implements Initializable{
         } catch (IOException e) {
             System.err.println("Erreur lors du chargement de l'interface principale");
             e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void handleReservationsAction() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/enicar/gestionagencevoyages/reservation-list.fxml"));
+
+            Parent root = loader.load();
+
+            Stage stage = (Stage) reservationsButton.getScene().getWindow();
+            stage.setTitle("Gestion des Réservations");
+            stage.getScene().setRoot(root);
+        } catch (IOException e) {
+            System.err.println("Erreur lors du chargement de l'interface des réservations.");
+            e.printStackTrace();
+
         }
     }
 }

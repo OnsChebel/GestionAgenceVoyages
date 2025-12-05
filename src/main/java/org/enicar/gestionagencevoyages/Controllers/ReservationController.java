@@ -1,4 +1,4 @@
-package org.enicar.gestionagencevoyages;
+package org.enicar.gestionagencevoyages.Controllers;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -94,7 +94,7 @@ public class ReservationController {
         }
 
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("ajouter-vol.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/enicar/gestionagencevoyages/ajouter-vol.fxml"));
             Parent root = loader.load();
             VolController volController = loader.getController();
             volController.setReservationId(reservationCourante.getIdReservation());
@@ -103,6 +103,7 @@ public class ReservationController {
             stage.getScene().setRoot(root);
         } catch (IOException e) {
             e.printStackTrace();
+
         }
     }
 
@@ -110,7 +111,7 @@ public class ReservationController {
     private void handleAjouterHotelAction() {
         if (reservationCourante == null) return;
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("ajouter-accomodation.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/enicar/gestionagencevoyages/ajouter-accomodation.fxml"));
             Parent root = loader.load();
             AccomodationController controller = loader.getController();
             controller.setReservationId(reservationCourante.getIdReservation());
@@ -138,7 +139,7 @@ public class ReservationController {
     @FXML
     private void handleRetourAction() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("reservation-list.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/enicar/gestionagencevoyages/reservation-list.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) retourButton.getScene().getWindow();
             stage.setTitle("Gestion des Réservation");
@@ -154,7 +155,7 @@ public class ReservationController {
     private void handleAjouterTransportAction() {
         if (reservationCourante == null) return;
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("ajouter-transport.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/enicar/gestionagencevoyages/ajouter-transport.fxml"));
             Parent root = loader.load();
 
             TransportController controller = loader.getController();
@@ -170,7 +171,7 @@ public class ReservationController {
     private void handleAjouterActiviteAction() {
         if (reservationCourante == null) return;
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("ajouter-activite.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/enicar/gestionagencevoyages/ajouter-activite.fxml"));
             Parent root = loader.load();
 
             ActiviteController controller = loader.getController();

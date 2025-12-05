@@ -1,4 +1,4 @@
-package org.enicar.gestionagencevoyages;
+package org.enicar.gestionagencevoyages.Controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -29,7 +29,7 @@ public class ConnexionController {
         }
 
         try {
-            Parent mainRoot = FXMLLoader.load(getClass().getResource("main.fxml"));
+            Parent mainRoot = FXMLLoader.load(getClass().getResource("/org/enicar/gestionagencevoyages/main.fxml"));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(mainRoot));
             stage.setTitle("Gestion Agence - connecté");

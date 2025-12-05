@@ -8,42 +8,33 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0"
-            xmlns="http://javafx.com/javafx/25"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="org.enicar.gestionagencevoyages.VolListController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.enicar.gestionagencevoyages.Controllers.VolListController">
 
    <children>
 
       <Text layoutX="213" layoutY="82" text="Liste des vols">
          <font>
-            <Font name="Broadway" size="25"/>
+            <Font name="Broadway" size="25" />
          </font>
       </Text>
 
-      <TableView fx:id="volTable" layoutX="28" layoutY="114"
-                 prefHeight="200" prefWidth="544">
+      <TableView fx:id="volTable" layoutX="28" layoutY="114" prefHeight="200" prefWidth="544">
          <columns>
-            <TableColumn fx:id="idColumn" prefWidth="60" text="ID"/>
-            <TableColumn fx:id="prixColumn" prefWidth="80" text="Prix Base"/>
-            <TableColumn fx:id="taxeColumn" prefWidth="70" text="Taxes"/>
-            <TableColumn fx:id="totalColumn" prefWidth="80" text="Total"/>
-            <TableColumn fx:id="departColumn" prefWidth="90" text="Départ"/>
-            <TableColumn fx:id="arriveeColumn" prefWidth="90" text="Arrivée"/>
-            <TableColumn fx:id="escalesColumn" prefWidth="80" text="Escales"/>
+            <TableColumn fx:id="idColumn" prefWidth="60" text="ID" />
+            <TableColumn fx:id="prixColumn" prefWidth="80" text="Prix Base" />
+            <TableColumn fx:id="taxeColumn" prefWidth="70" text="Taxes" />
+            <TableColumn fx:id="totalColumn" prefWidth="80" text="Total" />
+            <TableColumn fx:id="departColumn" prefWidth="90" text="Départ" />
+            <TableColumn fx:id="arriveeColumn" prefWidth="90" text="Arrivée" />
+            <TableColumn fx:id="escalesColumn" prefWidth="80" text="Escales" />
          </columns>
       </TableView>
 
-      <HBox alignment="CENTER" layoutX="210" layoutY="330"
-            prefHeight="39" prefWidth="180" spacing="30">
+      <HBox alignment="CENTER" layoutX="185.0" layoutY="330.0" prefHeight="39" prefWidth="230.0" spacing="30">
          <children>
-            <Button fx:id="ajouterVolButton"
-                    onAction="#handleAjouterVol"
-                    text="Enregistrer"/>
+            <Button fx:id="ajouterVolButton" onAction="#handleAjouterVol" text="Enregistrer" />
 
-            <Button fx:id="retourButton"
-                    onAction="#handleRetour"
-                    text="Retour"/>
+            <Button fx:id="retourButton" onAction="#handleRetour" text="Retour" />
          </children>
       </HBox>
 

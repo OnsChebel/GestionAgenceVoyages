@@ -11,7 +11,8 @@
 <AnchorPane prefHeight="400.0" prefWidth="600.0"
             xmlns="http://javafx.com/javafx/25"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="org.enicar.gestionagencevoyages.ActiviteListController">
+            stylesheets="@style.css"
+            fx:controller="org.enicar.gestionagencevoyages.Controllers.ActiviteListController">
     <children>
         <Text layoutX="180.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste des activités">
             <font>

@@ -1,4 +1,4 @@
-package org.enicar.gestionagencevoyages;
+package org.enicar.gestionagencevoyages.Controllers;
 
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -23,7 +23,6 @@ import org.enicar.gestionagencevoyages.Service.ReservationService;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class ReservationListController implements Initializable {
@@ -41,7 +40,7 @@ public class ReservationListController implements Initializable {
     @FXML
     private void handleAjouterReservationAction() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("ajouter-reservation.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/enicar/gestionagencevoyages/ajouter-reservation.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) ajouterReservationButton.getScene().getWindow();
             stage.setTitle("Ajout de reservation");
@@ -88,7 +87,7 @@ public class ReservationListController implements Initializable {
             return;
         }
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("vol-list.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/enicar/gestionagencevoyages/vol-list.fxml"));
             Parent root = loader.load();
             VolListController controller = loader.getController();
             controller.initData(selectedRes.getIdReservation());
@@ -106,7 +105,7 @@ public class ReservationListController implements Initializable {
         if (selectedRes == null) return;
 
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("accomodation-list.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/enicar/gestionagencevoyages/accomodation-list.fxml"));
             Parent root = loader.load();
             AccomodationListController controller = loader.getController();
             controller.initData(selectedRes.getIdReservation());
@@ -124,7 +123,7 @@ public class ReservationListController implements Initializable {
         if (selectedRes == null) return;
 
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("transport-list.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/enicar/gestionagencevoyages/transport-list.fxml"));
             Parent root = loader.load();
             TransportListController controller = loader.getController();
             controller.initData(selectedRes.getIdReservation());
@@ -142,7 +141,7 @@ public class ReservationListController implements Initializable {
         if (selectedRes == null) return;
 
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("activite-list.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/enicar/gestionagencevoyages/activite-list.fxml"));
             Parent root = loader.load();
             ActiviteListController controller = loader.getController();
             controller.initData(selectedRes.getIdReservation());
@@ -157,7 +156,7 @@ public class ReservationListController implements Initializable {
     @FXML
     private void handleMenuAction() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("main.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/enicar/gestionagencevoyages/main.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) menuButton.getScene().getWindow();
             stage.setTitle("Le Bon Voyage");

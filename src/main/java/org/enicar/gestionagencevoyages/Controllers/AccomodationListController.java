@@ -1,4 +1,4 @@
-package org.enicar.gestionagencevoyages;
+package org.enicar.gestionagencevoyages.Controllers;
 
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
@@ -115,7 +115,7 @@ public class AccomodationListController implements Initializable {
     @FXML
     private void handleAjouter() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("ajouter-accomodation.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/enicar/gestionagencevoyages/ajouter-accomodation.fxml"));
             Parent root = loader.load();
             AccomodationController controller = loader.getController();
             controller.setReservationId(this.currentReservationId);
@@ -129,7 +129,7 @@ public class AccomodationListController implements Initializable {
     @FXML
     private void handleRetour() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("reservation-list.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/enicar/gestionagencevoyages/reservation-list.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) accTable.getScene().getWindow();
             stage.setTitle("Liste des réservations");

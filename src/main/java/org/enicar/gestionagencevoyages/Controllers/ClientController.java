@@ -1,6 +1,5 @@
-package org.enicar.gestionagencevoyages;
+package org.enicar.gestionagencevoyages.Controllers;
 
-import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -58,6 +57,7 @@ public class ClientController {
 
             clientService.addClient(nouveauClient);
             System.out.println("Nouveau client enregistré avec succès. ID: " + nouveauClient.getId());
+            handleRetourAction();
 
         } catch (NumberFormatException e) {
             System.err.println("Erreur de format : Le numéro de téléphone ou le code postal doit être un nombre.");
@@ -70,7 +70,7 @@ public class ClientController {
     @FXML
     private void handleRetourAction() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("client-list.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/enicar/gestionagencevoyages/client-list.fxml"));
 
             Parent root = loader.load();
 

@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.enicar.gestionagencevoyages.ClientListController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.enicar.gestionagencevoyages.Controllers.ClientListController">
    <children>
       <Text layoutX="195.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste des clients">
          <font>
@@ -17,18 +17,17 @@
       </Text>
       <TableView fx:id="clientTable" layoutX="16.0" layoutY="108.0" prefHeight="200.0" prefWidth="566.0">
          <columns>
-            <TableColumn fx:id="idColumn" prefWidth="72.0" text="Id Personne" />
-            <TableColumn fx:id="nomColumn" prefWidth="69.6" text="Nom" />
-            <TableColumn fx:id="prenomColumn" prefWidth="77.6" text="Prénom" />
-            <TableColumn fx:id="coordColumn" prefWidth="102.4" text="Coordonnées" />
-            <TableColumn fx:id="adresseColumn" prefWidth="76.0" text="Adresse" />
-            <TableColumn fx:id="hisResvColumn" prefWidth="170.4" text="Historique Réservations" />
+            <TableColumn fx:id="idColumn" prefWidth="124.80001831054688" text="Id Personne" />
+            <TableColumn fx:id="nomColumn" prefWidth="86.4000244140625" text="Nom" />
+            <TableColumn fx:id="prenomColumn" prefWidth="97.5999755859375" text="Prénom" />
+            <TableColumn fx:id="coordColumn" prefWidth="119.20001220703125" text="Coordonnées" />
+            <TableColumn fx:id="adresseColumn" prefWidth="138.39996337890625" text="Adresse" />
          </columns>
       </TableView>
-      <HBox alignment="CENTER" layoutX="84.0" layoutY="329.0" prefHeight="36.0" prefWidth="431.0" spacing="30.0">
+      <HBox alignment="CENTER" layoutX="63.0" layoutY="329.0" prefHeight="36.0" prefWidth="474.0" spacing="30.0">
          <children>
-            <Button mnemonicParsing="false" text="Gérer les réservations" />
-            <Button fx:id="ajouterClientButton" mnemonicParsing="false" onAction="#handleAjouterClientAction" prefHeight="26.0" prefWidth="113.0" text="Ajouter un client" />
+            <Button fx:id="reservationsButton" mnemonicParsing="false" onAction="#handleReservationsAction" text="Gérer les réservations" />
+            <Button fx:id="ajouterClientButton" mnemonicParsing="false" onAction="#handleAjouterClientAction" prefHeight="34.0" prefWidth="131.0" text="Ajouter un client" />
             <Button fx:id="menuButton" mnemonicParsing="false" onAction="#handleMenuAction" text="Menu principal" />
          </children>
       </HBox>

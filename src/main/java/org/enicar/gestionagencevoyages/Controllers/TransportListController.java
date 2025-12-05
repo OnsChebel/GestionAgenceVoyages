@@ -1,4 +1,4 @@
-package org.enicar.gestionagencevoyages;
+package org.enicar.gestionagencevoyages.Controllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -83,7 +83,7 @@ public class TransportListController implements Initializable {
     @FXML
     private void handleAjouter() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("ajouter-transport.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/enicar/gestionagencevoyages/ajouter-transport.fxml"));
             Parent root = loader.load();
 
             TransportController controller = loader.getController();
@@ -97,7 +97,7 @@ public class TransportListController implements Initializable {
     @FXML
     private void handleRetour() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("reservation-list.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/enicar/gestionagencevoyages/reservation-list.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) transportTable.getScene().getWindow();
             stage.setTitle("Liste des réservations");

@@ -1,4 +1,4 @@
-package org.enicar.gestionagencevoyages;
+package org.enicar.gestionagencevoyages.Controllers;
 
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
@@ -6,9 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
 import org.enicar.gestionagencevoyages.Model.Personnes.Date;
 import org.enicar.gestionagencevoyages.Model.Services.Activite;
 import org.enicar.gestionagencevoyages.Service.ActiviteService;
@@ -204,7 +202,7 @@ public class ActiviteListController {
     @FXML
     private void handleRetour() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("reservation-list.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/enicar/gestionagencevoyages/reservation-list.fxml"));
             activiteTable.getScene().setRoot(loader.load());
         } catch (Exception e) {
             e.printStackTrace();

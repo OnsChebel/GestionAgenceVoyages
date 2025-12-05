@@ -14,8 +14,11 @@ module org.enicar.gestionagencevoyages {
     requires javafx.base;
 
     opens org.enicar.gestionagencevoyages to javafx.fxml;
-    exports org.enicar.gestionagencevoyages;
+
 
     opens org.enicar.gestionagencevoyages.Model.Reservations to javafx.base;
     opens org.enicar.gestionagencevoyages.Model.Personnes to javafx.base;
+    exports org.enicar.gestionagencevoyages.Controllers;
+    opens org.enicar.gestionagencevoyages.Controllers to javafx.fxml;
+    exports org.enicar.gestionagencevoyages;
 }
