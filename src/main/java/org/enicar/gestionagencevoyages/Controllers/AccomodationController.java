@@ -1,4 +1,4 @@
-package org.enicar.gestionagencevoyages;
+package org.enicar.gestionagencevoyages.Controllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -78,7 +78,7 @@ public class AccomodationController {
 
     public void retourALaListe() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("accomodation-list.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/enicar/gestionagencevoyages/accomodation-list.fxml"));
             Parent root = loader.load();
             AccomodationListController controller = loader.getController();
             controller.initData(this.reservationId);

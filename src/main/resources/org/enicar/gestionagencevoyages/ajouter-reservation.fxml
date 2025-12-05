@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.enicar.gestionagencevoyages.ReservationController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.enicar.gestionagencevoyages.Controllers.ReservationController">
    <children>
       <Text layoutX="144.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ajouter une réservation">
          <font>
@@ -16,7 +16,7 @@
          </font>
       </Text>
       <Button fx:id="enregistrerButton" layoutX="240.0" layoutY="345.0" mnemonicParsing="false" onAction="#handleEnregistrerAction" text="Enregistrer" />
-      <Text layoutX="28.0" layoutY="300.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Services inclus:" />
+      <Text layoutX="28.0" layoutY="304.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Services inclus:" />
       <Button fx:id="retourButton" layoutX="357.0" layoutY="345.0" mnemonicParsing="false" onAction="#handleRetourAction" text="Retour" />
       <Button fx:id="btnAjoutVol" disable="true" layoutX="144.0" layoutY="283.0" mnemonicParsing="false" onAction="#handleAjouterVolAction" text="Ajouter vol" />
       <Button fx:id="btnAjoutHotel" disable="true" layoutX="241.0" layoutY="283.0" mnemonicParsing="false" onAction="#handleAjouterHotelAction" text="Ajouter hôtel" />
@@ -30,7 +30,7 @@
             <ChoiceBox fx:id="ResStatut" prefWidth="150.0" />
          </children>
       </VBox>
-      <VBox alignment="TOP_RIGHT" layoutX="133.0" layoutY="74.0" prefHeight="200.0" prefWidth="107.0" spacing="32.0">
+      <VBox alignment="TOP_RIGHT" layoutX="133.0" layoutY="74.0" prefHeight="200.0" prefWidth="107.0" spacing="40.0">
          <children>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ID Reservation:" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ID client:" />

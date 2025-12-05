@@ -9,13 +9,13 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.enicar.gestionagencevoyages.ClientController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.enicar.gestionagencevoyages.Controllers.ClientController">
    <children>
-      <Label alignment="CENTER" layoutX="180.0" layoutY="31.0" text="Ajouter un client">
+      <Text layoutX="213" layoutY="82" text="Ajouter Client">
          <font>
-            <Font name="Broadway" size="25.0" />
+            <Font name="Broadway" size="25" />
          </font>
-      </Label>
+      </Text>
       <TextField fx:id="idField" disable="true" layoutX="154.0" layoutY="95.0" prefHeight="26.0" prefWidth="286.0" />
       <TextField fx:id="prenomField" layoutX="154.0" layoutY="129.0" prefHeight="26.0" prefWidth="286.0" />
       <TextField fx:id="nomField" layoutX="154.0" layoutY="165.0" prefHeight="26.0" prefWidth="286.0" />
@@ -26,7 +26,7 @@
 
       <Text layoutX="311.0" layoutY="319.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Code postal:" />
       <TextField fx:id="codePostalField" layoutX="384.0" layoutY="302.0" prefHeight="26.0" prefWidth="53.0" />
-      <HBox alignment="CENTER" layoutX="210.0" layoutY="340.0" prefHeight="38.0" prefWidth="169.0" spacing="30.0">
+      <HBox alignment="CENTER" layoutX="197.0" layoutY="340.0" prefHeight="38.0" prefWidth="206.0" spacing="30.0">
          <children>
       
             <Button fx:id="enregistrerButton" mnemonicParsing="false" onAction="#handleEnregistrerAction" text="Enregistrer" />

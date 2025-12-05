@@ -1,9 +1,8 @@
-package org.enicar.gestionagencevoyages;
+package org.enicar.gestionagencevoyages.Controllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.Label;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
@@ -20,8 +19,6 @@ public class MainController {
     @FXML
     private Button reservationsButton;
 
-    @FXML
-    private Button voyagesButton;
 
     @FXML
     private Button clientsButton;
@@ -34,7 +31,7 @@ public class MainController {
     @FXML
     private void handleReservationsAction() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("reservation-list.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/enicar/gestionagencevoyages/reservation-list.fxml"));
 
             Parent root = loader.load();
 
@@ -48,28 +45,11 @@ public class MainController {
         }
     }
 
-    @FXML
-    private void handleVoyagesAction() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("service-list.fxml"));
-
-            Parent root = loader.load();
-            Stage stage = (Stage) voyagesButton.getScene().getWindow();
-            stage.setTitle("Gestion des vols");
-            stage.getScene().setRoot(root);
-        }
-        catch (IOException e) {
-            System.err.println("Erreur lors du chargement de l'interface des vols.");
-            e.printStackTrace();
-
-        }
-
-    }
 
     @FXML
     private void handleClientsAction() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("client-list.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/enicar/gestionagencevoyages/client-list.fxml"));
 
             Parent root = loader.load();
             Stage stage = (Stage) clientsButton.getScene().getWindow();
@@ -86,7 +66,7 @@ public class MainController {
     @FXML
     public void onLogout(ActionEvent event) {
         try {
-            Parent loginRoot = FXMLLoader.load(getClass().getResource("connexion.fxml"));
+            Parent loginRoot = FXMLLoader.load(getClass().getResource("/org/enicar/gestionagencevoyages/connexion.fxml"));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             
             Scene currentScene = stage.getScene();

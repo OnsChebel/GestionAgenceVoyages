@@ -32,4 +32,9 @@ public class ClientService {
                 .findFirst()
                 .orElse(null);
     }
+
+    public void deleteClient(Client client) {
+        clientDAO.deleteClient(client.getId());
+        this.clients.remove(client);
+    }
 }
