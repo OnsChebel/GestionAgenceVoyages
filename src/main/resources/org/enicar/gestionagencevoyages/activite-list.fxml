@@ -4,29 +4,38 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.enicar.gestionagencevoyages.ActiviteListController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0"
+            xmlns="http://javafx.com/javafx/25"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.enicar.gestionagencevoyages.ActiviteListController">
     <children>
-        <Text layoutX="210.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste des Activités">
+        <Text layoutX="180.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste des activités">
             <font>
                 <Font name="Broadway" size="25.0" />
             </font>
         </Text>
 
-        <TableView fx:id="activiteTable" layoutX="26.0" layoutY="100.0" prefHeight="200.0" prefWidth="600.0">
+        <TableView fx:id="activiteTable" layoutX="50.0" layoutY="90.0" prefHeight="230.0" prefWidth="500.0">
             <columns>
-                <TableColumn fx:id="idColumn" prefWidth="50.0" text="Id" />
-                <TableColumn fx:id="intituleColumn" prefWidth="150.0" text="Intitulé" />
-                <TableColumn fx:id="dateColumn" prefWidth="100.0" text="Date" />
-                <TableColumn fx:id="horaireColumn" prefWidth="75.0" text="Horaire" />
-                <TableColumn fx:id="dureeColumn" prefWidth="75.0" text="Durée" />
-                <TableColumn fx:id="prixColumn" prefWidth="100.0" text="Prix" />
+                <TableColumn fx:id="intituleColumn" text="Intitulé" prefWidth="120.0"/>
+                <TableColumn fx:id="dateColumn" text="Date" prefWidth="100.0"/>
+                <TableColumn fx:id="horaireColumn" text="Horaire" prefWidth="80.0"/>
+                <TableColumn fx:id="dureeColumn" text="Durée" prefWidth="80.0"/>
+                <TableColumn fx:id="prixColumn" text="Prix" prefWidth="80.0"/>
+                <TableColumn fx:id="totalColumn" text="Total" prefWidth="100.0"/>
             </columns>
         </TableView>
 
-        <Button layoutX="200.0" layoutY="330.0" mnemonicParsing="false" onAction="#handleRetour" text="Retour" />
-        <Button layoutX="320.0" layoutY="330.0" mnemonicParsing="false" onAction="#handleAjouter" text="Ajouter une activité" />
+        <HBox alignment="CENTER" layoutX="140.0" layoutY="340.0" prefHeight="40.0" prefWidth="320.0" spacing="20.0">
+            <children>
+                <Button mnemonicParsing="false" onAction="#handleAjouter" text="Ajouter Activité"
+                        style="-fx-background-color: #4CAF50; -fx-text-fill: white;"/>
+                <Button mnemonicParsing="false" onAction="#handleRetour" text="Retour"/>
+            </children>
+        </HBox>
     </children>
 </AnchorPane>

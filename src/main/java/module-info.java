@@ -11,6 +11,7 @@ module org.enicar.gestionagencevoyages {
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
     requires java.sql;
+    requires javafx.base;
 
     opens org.enicar.gestionagencevoyages to javafx.fxml;
     exports org.enicar.gestionagencevoyages;
